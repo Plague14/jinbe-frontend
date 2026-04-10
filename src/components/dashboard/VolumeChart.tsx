@@ -29,13 +29,13 @@ export function VolumeChart() {
   const tickColor = isLight ? '#64748b' : '#64748b'
 
   return (
-    <div className="flex-1 flex flex-col gap-6 p-6 rounded-xl border border-jinbe-border bg-jinbe-card shadow-sm">
-      <div className="flex items-center justify-between">
+    <div className="flex-1 flex flex-col gap-4 sm:gap-6 p-4 sm:p-6 rounded-xl border border-jinbe-border bg-jinbe-card shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h3 className="text-lg font-bold text-jinbe-text">Volume de Operações</h3>
-          <p className="text-sm text-jinbe-dim">Monthly cross-border settlement trends</p>
+          <h3 className="text-base sm:text-lg font-bold text-jinbe-text">Volume de Operações</h3>
+          <p className="text-xs sm:text-sm text-jinbe-dim">Monthly cross-border settlement trends</p>
         </div>
-        <div className="flex items-center p-1 bg-jinbe-hover rounded-lg">
+        <div className="flex items-center p-1 bg-jinbe-hover rounded-lg self-start sm:self-auto">
           {periods.map((p) => (
             <button
               key={p}
@@ -52,14 +52,14 @@ export function VolumeChart() {
         </div>
       </div>
 
-      <div className="flex-1 min-h-[250px] rounded-xl border border-dashed border-jinbe-hover bg-gradient-to-b from-jinbe-primary/10 to-transparent p-4">
+      <div className="flex-1 min-h-[200px] sm:min-h-[250px] rounded-xl border border-dashed border-jinbe-hover bg-gradient-to-b from-jinbe-primary/10 to-transparent p-2 sm:p-4">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} barGap={8}>
+          <BarChart data={data} barGap={4}>
             <XAxis
               dataKey="month"
               axisLine={false}
               tickLine={false}
-              tick={{ fill: tickColor, fontSize: 10, fontWeight: 600 }}
+              tick={{ fill: tickColor, fontSize: 9, fontWeight: 600 }}
             />
             <YAxis hide />
             <Tooltip
@@ -71,7 +71,7 @@ export function VolumeChart() {
             />
             <Bar
               dataKey="target"
-              radius={[6, 6, 0, 0]}
+              radius={[4, 4, 0, 0]}
               onMouseEnter={(_, i) => setActiveBar(i)}
               onMouseLeave={() => setActiveBar(null)}
             >
@@ -82,7 +82,7 @@ export function VolumeChart() {
                 />
               ))}
             </Bar>
-            <Bar dataKey="value" radius={[6, 6, 0, 0]}>
+            <Bar dataKey="value" radius={[4, 4, 0, 0]}>
               {data.map((_, i) => (
                 <Cell
                   key={i}

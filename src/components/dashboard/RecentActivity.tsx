@@ -68,29 +68,29 @@ const iconMap = {
 
 export function RecentActivity() {
   return (
-    <div className="w-[300px] shrink-0 flex flex-col p-6 rounded-xl border border-jinbe-border bg-jinbe-card shadow-sm">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-bold text-jinbe-text">Atividade Recente</h3>
-        <button className="text-sm font-medium text-jinbe-primary hover:underline">
+    <div className="w-full lg:w-[300px] lg:shrink-0 flex flex-col p-4 sm:p-6 rounded-xl border border-jinbe-border bg-jinbe-card shadow-sm">
+      <div className="flex items-center justify-between mb-4 sm:mb-6">
+        <h3 className="text-base sm:text-lg font-bold text-jinbe-text">Atividade Recente</h3>
+        <button className="text-xs sm:text-sm font-medium text-jinbe-primary hover:underline">
           See all
         </button>
       </div>
 
-      <div className="flex flex-col gap-5 flex-1 overflow-y-auto">
+      <div className="flex flex-col gap-4 sm:gap-5 flex-1 overflow-y-auto max-h-[300px] lg:max-h-none">
         {activities.map((item, i) => {
           const { icon: Icon, bg } = iconMap[item.type]
           const isLast = i === activities.length - 1
           return (
             <div key={item.id} className="flex gap-3">
-              <div className={`flex items-center justify-center w-10 h-10 rounded-full shrink-0 ${bg}`}>
-                <Icon className="w-4 h-4" />
+              <div className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full shrink-0 ${bg}`}>
+                <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
               </div>
-              <div className={`flex-1 pb-4 ${!isLast ? 'border-b border-jinbe-border' : ''}`}>
-                <div className="flex items-start justify-between">
-                  <span className="text-sm font-bold text-jinbe-text">{item.title}</span>
-                  <span className="text-sm font-bold text-jinbe-text">{item.amount}</span>
+              <div className={`flex-1 pb-3 sm:pb-4 ${!isLast ? 'border-b border-jinbe-border' : ''}`}>
+                <div className="flex items-start justify-between gap-2">
+                  <span className="text-xs sm:text-sm font-bold text-jinbe-text">{item.title}</span>
+                  <span className="text-xs sm:text-sm font-bold text-jinbe-text whitespace-nowrap">{item.amount}</span>
                 </div>
-                <p className="text-xs text-jinbe-dim mt-1">{item.description}</p>
+                <p className="text-[10px] sm:text-xs text-jinbe-dim mt-1 truncate">{item.description}</p>
                 <p className="text-[10px] text-jinbe-muted uppercase mt-1">
                   {item.status} • {item.time}
                 </p>

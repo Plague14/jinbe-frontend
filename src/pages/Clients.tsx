@@ -63,17 +63,17 @@ export default function Clients() {
     <>
       <Header title="Client Directory" subtitle="Manage clients and bank accounts" />
 
-      <div className="flex flex-col gap-6 p-8">
+      <div className="flex flex-col gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8">
         {/* Toolbar */}
-        <div className="flex items-center justify-between">
-          <div className="relative">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="relative flex-1 sm:flex-none">
             <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`} />
             <input
               type="text"
               placeholder="Search by name, CNPJ or email..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className={`pl-10 pr-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:border-jinbe-primary w-[320px] ${
+              className={`w-full sm:w-[280px] lg:w-[320px] pl-10 pr-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:border-jinbe-primary ${
                 isLight
                   ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400'
                   : 'bg-jinbe-card border-jinbe-border text-white placeholder:text-jinbe-dim'
@@ -82,10 +82,11 @@ export default function Clients() {
           </div>
           <Link
             to="/clients/new"
-            className="flex items-center gap-2 px-5 py-2.5 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white text-sm font-semibold rounded-lg transition-colors"
+            className="flex items-center justify-center gap-2 px-5 py-2.5 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white text-sm font-semibold rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
-            Register Client
+            <span className="hidden sm:inline">Register Client</span>
+            <span className="sm:hidden">Register</span>
           </Link>
         </div>
 
@@ -96,7 +97,7 @@ export default function Clients() {
             return (
               <div
                 key={client.id}
-                className={`flex flex-col gap-4 p-5 rounded-xl border transition-colors ${
+                className={`flex flex-col gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl border transition-colors ${
                   isLight
                     ? 'bg-white border-slate-200 hover:border-slate-300 shadow-sm'
                     : 'bg-jinbe-card border-jinbe-border hover:border-jinbe-hover'
@@ -105,8 +106,8 @@ export default function Clients() {
                 {/* Top row */}
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-jinbe-primary/10">
-                      <Building2 className="w-5 h-5 text-jinbe-primary" />
+                    <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-jinbe-primary/10">
+                      <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-jinbe-primary" />
                     </div>
                     <div>
                       <h3 className={`text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>{client.name}</h3>
@@ -114,9 +115,9 @@ export default function Clients() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className={`flex items-center gap-1.5 text-xs font-semibold ${statusConfig[client.status].className}`}>
-                      <StatusIcon className="w-3.5 h-3.5" />
-                      {statusConfig[client.status].label}
+                    <span className={`flex items-center gap-1 sm:gap-1.5 text-xs font-semibold ${statusConfig[client.status].className}`}>
+                      <StatusIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                      <span className="hidden sm:inline">{statusConfig[client.status].label}</span>
                     </span>
                     <button className={`p-1.5 rounded-md transition-colors ${
                       isLight ? 'text-slate-400 hover:text-slate-700 hover:bg-slate-100' : 'text-jinbe-dim hover:text-white hover:bg-jinbe-border/50'
@@ -127,34 +128,34 @@ export default function Clients() {
                 </div>
 
                 {/* Contact info */}
-                <div className="flex flex-wrap gap-x-5 gap-y-1.5">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-1.5 sm:gap-x-5 sm:gap-y-1.5">
                   <span className={`flex items-center gap-1.5 text-xs ${isLight ? 'text-slate-500' : 'text-jinbe-muted'}`}>
-                    <Mail className={`w-3.5 h-3.5 ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`} />
-                    {client.email}
+                    <Mail className={`w-3.5 h-3.5 shrink-0 ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`} />
+                    <span className="truncate">{client.email}</span>
                   </span>
                   <span className={`flex items-center gap-1.5 text-xs ${isLight ? 'text-slate-500' : 'text-jinbe-muted'}`}>
-                    <Phone className={`w-3.5 h-3.5 ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`} />
+                    <Phone className={`w-3.5 h-3.5 shrink-0 ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`} />
                     {client.phone}
                   </span>
                   <span className={`flex items-center gap-1.5 text-xs ${isLight ? 'text-slate-500' : 'text-jinbe-muted'}`}>
-                    <MapPin className={`w-3.5 h-3.5 ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`} />
+                    <MapPin className={`w-3.5 h-3.5 shrink-0 ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`} />
                     {client.city}, {client.country}
                   </span>
                 </div>
 
                 {/* Stats row */}
                 <div className={`flex items-center justify-between pt-3 border-t ${isLight ? 'border-slate-100' : 'border-jinbe-border'}`}>
-                  <div className="flex gap-6">
+                  <div className="flex gap-4 sm:gap-6">
                     <div>
-                      <p className={`text-xs ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`}>Total Volume</p>
-                      <p className={`text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>{client.totalVolume}</p>
+                      <p className={`text-[10px] sm:text-xs ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`}>Volume</p>
+                      <p className={`text-xs sm:text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>{client.totalVolume}</p>
                     </div>
                     <div>
-                      <p className={`text-xs ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`}>Operations</p>
-                      <p className={`text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>{client.opsCount}</p>
+                      <p className={`text-[10px] sm:text-xs ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`}>Ops</p>
+                      <p className={`text-xs sm:text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>{client.opsCount}</p>
                     </div>
-                    <div>
-                      <p className={`text-xs ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`}>Last Operation</p>
+                    <div className="hidden sm:block">
+                      <p className={`text-xs ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`}>Last Op</p>
                       <p className={`text-sm font-semibold ${isLight ? 'text-slate-500' : 'text-jinbe-muted'}`}>{client.lastOp}</p>
                     </div>
                   </div>

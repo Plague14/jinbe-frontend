@@ -42,18 +42,18 @@ const kpis = [
 export default function Dashboard() {
   return (
     <>
-      <Header title="Main Dashboard Overview" subtitle="PIX to SEPA Cross-border Tracking" />
+      <Header title="Dashboard" subtitle="PIX to SEPA Cross-border Tracking" />
 
-      <div className="flex flex-col gap-8 p-8">
+      <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8">
         {/* KPI Row */}
-        <div className="flex gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           {kpis.map((kpi) => (
             <KPICard key={kpi.label} {...kpi} />
           ))}
         </div>
 
         {/* Chart + Activity */}
-        <div className="flex gap-8 min-h-[430px]">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
           <VolumeChart />
           <RecentActivity />
         </div>

@@ -6,6 +6,7 @@ import {
   Landmark,
   BarChart3,
   Settings,
+  X,
 } from 'lucide-react'
 import logoJinbe from '@/assets/logo jinbe.png'
 
@@ -17,12 +18,30 @@ const navItems = [
   { to: '/metrics', icon: BarChart3, label: 'Metrics' },
 ]
 
-export function Sidebar() {
+interface SidebarProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export function Sidebar({ isOpen, onClose }: SidebarProps) {
   return (
-    <aside className="flex flex-col w-[260px] min-h-screen bg-jinbe-sidebar border-r border-jinbe-border">
-      {/* Logo */}
-      <div className="flex items-center px-6 py-6">
+    <aside
+      className={`
+        fixed inset-y-0 left-0 z-50 flex flex-col w-[260px] min-h-screen bg-jinbe-sidebar border-r border-jinbe-border
+        transform transition-transform duration-300 ease-in-out
+        lg:relative lg:translate-x-0
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}
+    >
+      {/* Logo + Close button */}
+      <div className="flex items-center justify-between px-6 py-6">
         <img src={logoJinbe} alt="Jinbe" className="h-9" />
+        <button
+          onClick={onClose}
+          className="lg:hidden p-2 rounded-lg text-jinbe-muted hover:text-white hover:bg-jinbe-border/50 transition-colors"
+        >
+          <X className="w-5 h-5" />
+        </button>
       </div>
 
       {/* Nav */}
@@ -32,6 +51,7 @@ export function Sidebar() {
             key={item.to}
             to={item.to}
             end={item.to === '/'}
+            onClick={onClose}
             className={({ isActive }) =>
               `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
                 isActive
@@ -50,6 +70,7 @@ export function Sidebar() {
       <div className="border-t border-jinbe-border px-4 py-4">
         <NavLink
           to="/settings"
+          onClick={onClose}
           className={({ isActive }) =>
             `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
               isActive
