@@ -1,0 +1,104 @@
+import { ArrowUpRight, RefreshCw, AlertTriangle, Zap } from 'lucide-react'
+
+interface ActivityItem {
+  id: string
+  type: 'pix_transfer' | 'rate_fix' | 'sepa_payout' | 'compliance' | 'settlement'
+  title: string
+  amount: string
+  description: string
+  status: string
+  time: string
+}
+
+const activities: ActivityItem[] = [
+  {
+    id: '1',
+    type: 'pix_transfer',
+    title: 'PIX Transfer',
+    amount: '€1,450.00',
+    description: 'Santos & Co → Gmbh Berlin',
+    status: 'Success',
+    time: '2m ago',
+  },
+  {
+    id: '2',
+    type: 'rate_fix',
+    title: 'Rate Fix',
+    amount: '1.0822',
+    description: 'Automatic hedging executed',
+    status: 'Processing',
+    time: '15m ago',
+  },
+  {
+    id: '3',
+    type: 'sepa_payout',
+    title: 'SEPA Payout',
+    amount: '€12,000.00',
+    description: 'AgroTech SA → European Ag',
+    status: 'Success',
+    time: '1h ago',
+  },
+  {
+    id: '4',
+    type: 'compliance',
+    title: 'Compliance Check',
+    amount: '€85,000.00',
+    description: 'High volume alert: Rio Import',
+    status: 'Action Required',
+    time: '2h ago',
+  },
+  {
+    id: '5',
+    type: 'settlement',
+    title: 'PIX Settlement',
+    amount: '€3,200.00',
+    description: 'Global Logistics → Marine Ltd',
+    status: 'Success',
+    time: '3h ago',
+  },
+]
+
+const iconMap = {
+  pix_transfer: { icon: ArrowUpRight, bg: 'bg-jinbe-success/10 text-jinbe-success' },
+  rate_fix: { icon: RefreshCw, bg: 'bg-jinbe-info/10 text-jinbe-info' },
+  sepa_payout: { icon: ArrowUpRight, bg: 'bg-jinbe-success/10 text-jinbe-success' },
+  compliance: { icon: AlertTriangle, bg: 'bg-jinbe-warning/10 text-jinbe-warning' },
+  settlement: { icon: Zap, bg: 'bg-jinbe-success/10 text-jinbe-success' },
+}
+
+export function RecentActivity() {
+  return (
+    <div className="w-[300px] shrink-0 flex flex-col p-6 rounded-xl border border-jinbe-border bg-jinbe-card shadow-sm">
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="text-lg font-bold text-jinbe-text">Atividade Recente</h3>
+        <button className="text-sm font-medium text-jinbe-primary hover:underline">
+          See all
+        </button>
+      </div>
+
+      <div className="flex flex-col gap-5 flex-1 overflow-y-auto">
+        {activities.map((item, i) => {
+          const { icon: Icon, bg } = iconMap[item.type]
+          const isLast = i === activities.length - 1
+          return (
+            <div key={item.id} className="flex gap-3">
+              <div className={`flex items-center justify-center w-10 h-10 rounded-full shrink-0 ${bg}`}>
+                <Icon className="w-4 h-4" />
+              </div>
+              <div className={`flex-1 pb-4 ${!isLast ? 'border-b border-jinbe-border' : ''}`}>
+                <div className="flex items-start justify-between">
+                  <span className="text-sm font-bold text-jinbe-text">{item.title}</span>
+                  <span className="text-sm font-bold text-jinbe-text">{item.amount}</span>
+                </div>
+                <p className="text-xs text-jinbe-dim mt-1">{item.description}</p>
+                <p className="text-[10px] text-jinbe-muted uppercase mt-1">
+                  {item.status} • {item.time}
+                </p>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}

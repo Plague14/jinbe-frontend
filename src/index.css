@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  --color-jinbe-bg: #101922;
+  --color-jinbe-sidebar: #1a202c;
+  --color-jinbe-border: #1e293b;
+  --color-jinbe-card: rgba(30, 41, 59, 0.5);
+  --color-jinbe-primary: #0d7ff2;
+  --color-jinbe-text: #ffffff;
+  --color-jinbe-muted: #94a3b8;
+  --color-jinbe-dim: #64748b;
+  --color-jinbe-success: #10b981;
+  --color-jinbe-danger: #f43f5e;
+  --color-jinbe-warning: #f59e0b;
+  --color-jinbe-info: #3b82f6;
+  --color-jinbe-hover: #334155;
+  --color-jinbe-active: #475569;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    background: var(--color-jinbe-bg);
+    color: var(--color-jinbe-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-jinbe-border) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: var(--color-jinbe-border);
+    border-radius: 3px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--color-jinbe-hover);
+  }
+
+  /* Light theme overrides — applied to content area only */
+  .theme-light {
+    --color-jinbe-bg: #f8fafc;
+    --color-jinbe-border: #e2e8f0;
+    --color-jinbe-card: #ffffff;
+    --color-jinbe-text: #0f172a;
+    --color-jinbe-muted: #64748b;
+    --color-jinbe-dim: #94a3b8;
+    --color-jinbe-hover: #e2e8f0;
+    --color-jinbe-active: #cbd5e1;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+
+  .theme-light *::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+  }
+
+  .theme-light *::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
