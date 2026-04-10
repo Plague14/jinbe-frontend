@@ -119,7 +119,7 @@ export default function Metrics() {
                 <YAxis tick={{ fill: tickColor, fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(v) => `€${(v / 1000000).toFixed(1)}M`} />
                 <Tooltip
                   contentStyle={tooltipStyle}
-                  formatter={(value: number, name: string) => [name === 'volume' ? `€ ${(value / 1000000).toFixed(2)}M` : value, name === 'volume' ? 'Volume' : 'Operations']}
+                  formatter={(value, name) => [name === 'volume' ? `€ ${(Number(value) / 1000000).toFixed(2)}M` : value, name === 'volume' ? 'Volume' : 'Operations']}
                 />
                 <Bar dataKey="volume" fill="#0d7ff2" radius={[4, 4, 0, 0]} />
               </BarChart>
