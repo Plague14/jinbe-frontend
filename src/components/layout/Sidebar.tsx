@@ -7,6 +7,9 @@ import {
   BarChart3,
   Settings,
   X,
+  Webhook,
+  UserPlus,
+  Sparkles,
 } from 'lucide-react'
 import logoJinbe from '@/assets/logo jinbe.png'
 
@@ -14,7 +17,9 @@ const navItems = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/operations', icon: ArrowLeftRight, label: 'Operations' },
   { to: '/clients', icon: Users, label: 'Clients' },
+  { to: '/customers', icon: UserPlus, label: 'Customers' },
   { to: '/beneficiaries', icon: Landmark, label: 'Beneficiaries' },
+  { to: '/webhooks', icon: Webhook, label: 'Webhooks' },
   { to: '/metrics', icon: BarChart3, label: 'Metrics' },
 ]
 
@@ -65,6 +70,24 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           </NavLink>
         ))}
       </nav>
+
+      {/* Onboarding Flow */}
+      <div className="border-t border-jinbe-border px-4 py-4">
+        <NavLink
+          to="/onboarding/login"
+          onClick={onClose}
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+              isActive
+                ? 'bg-gradient-to-r from-jinbe-primary to-jinbe-info text-white'
+                : 'text-jinbe-primary hover:bg-jinbe-primary/10'
+            }`
+          }
+        >
+          <Sparkles className="w-[18px] h-[18px]" />
+          Fluxo Onboarding
+        </NavLink>
+      </div>
 
       {/* Settings */}
       <div className="border-t border-jinbe-border px-4 py-4">
