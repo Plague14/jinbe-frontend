@@ -15,9 +15,7 @@ import Settings from '@/pages/Settings'
 
 // Onboarding pages
 import Login from '@/pages/onboarding/Login'
-import Register from '@/pages/onboarding/Register'
-import Questions from '@/pages/onboarding/Questions'
-import Tutorial from '@/pages/onboarding/Tutorial'
+import Onboarding from '@/pages/onboarding/Onboarding'
 
 export default function App() {
   return (
@@ -25,9 +23,7 @@ export default function App() {
       <Routes>
         {/* Onboarding flow (outside of AppLayout) */}
         <Route path="/onboarding/login" element={<Login />} />
-        <Route path="/onboarding/register" element={<Register />} />
-        <Route path="/onboarding/questions" element={<Questions />} />
-        <Route path="/onboarding/tutorial" element={<Tutorial />} />
+        <Route path="/onboarding/register" element={<Onboarding />} />
 
         {/* Main app routes */}
         <Route element={<AppLayout />}>

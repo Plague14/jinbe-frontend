@@ -1,6 +1,8 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
+:root {
   --color-jinbe-bg: #101922;
   --color-jinbe-sidebar: #1a202c;
   --color-jinbe-border: #1e293b;
@@ -16,6 +18,13 @@
   --color-jinbe-hover: #334155;
   --color-jinbe-active: #475569;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* RGB channels for opacity modifier support in Tailwind 3 */
+  --jinbe-primary-rgb: 13, 127, 242;
+  --jinbe-success-rgb: 16, 185, 129;
+  --jinbe-danger-rgb: 244, 63, 94;
+  --jinbe-warning-rgb: 245, 158, 11;
+  --jinbe-info-rgb: 59, 130, 246;
 }
 
 @layer base {
@@ -51,7 +60,6 @@
     background: var(--color-jinbe-hover);
   }
 
-  /* Light theme overrides — applied to content area only */
   .theme-light {
     --color-jinbe-bg: #f8fafc;
     --color-jinbe-border: #e2e8f0;

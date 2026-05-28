@@ -1,19 +1,13 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { Mail, Lock, ArrowRight, Loader2, Sparkles } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Loader2, Check } from 'lucide-react'
 import logoJinbe from '@/assets/logo jinbe.png'
-
-// Demo account for testing the onboarding flow
-const DEMO_ACCOUNT = {
-  email: 'demo@jinbe.com',
-  password: 'demo123',
-}
 
 export default function Login() {
   const navigate = useNavigate()
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -22,72 +16,34 @@ export default function Login() {
     setError('')
     setIsLoading(true)
 
-    // Simulate authentication delay
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
-    // Check demo credentials or allow any valid email/password
-    if (
-      (email === DEMO_ACCOUNT.email && password === DEMO_ACCOUNT.password) ||
-      (email.includes('@') && password.length >= 6)
-    ) {
+    if (email.includes('@') && password.length >= 6) {
       localStorage.setItem('user_email', email)
-      navigate('/onboarding/questions')
+      localStorage.setItem('onboarding_complete', 'true')
+      navigate('/')
     } else {
-      setError('Invalid credentials. Use demo@jinbe.com / demo123 or any valid email with 6+ char password')
+      setError('E-mail ou senha invalidos. Verifique e tente novamente.')
     }
 
     setIsLoading(false)
   }
 
-  const handleDemoLogin = async () => {
-    setEmail(DEMO_ACCOUNT.email)
-    setPassword(DEMO_ACCOUNT.password)
-    setIsLoading(true)
-
-    await new Promise((resolve) => setTimeout(resolve, 800))
-    localStorage.setItem('user_email', DEMO_ACCOUNT.email)
-    navigate('/onboarding/questions')
-  }
-
   return (
     <div className="min-h-screen bg-jinbe-bg flex flex-col items-center justify-center px-4">
-      {/* Background gradient */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-jinbe-primary/10 blur-[120px] rounded-full" />
       </div>
 
       <div className="relative w-full max-w-md">
-        {/* Logo */}
         <div className="flex justify-center mb-8">
           <img src={logoJinbe} alt="Jinbe" className="h-12" />
         </div>
 
-        {/* Card */}
         <div className="bg-jinbe-card border border-jinbe-border rounded-2xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-semibold text-white mb-2">Welcome back</h1>
-            <p className="text-jinbe-muted">
-              Sign in to access your account
-            </p>
-          </div>
-
-          {/* Demo Login Button */}
-          <button
-            onClick={handleDemoLogin}
-            disabled={isLoading}
-            className="w-full flex items-center justify-center gap-2 py-3 mb-6 bg-gradient-to-r from-jinbe-primary to-jinbe-info hover:opacity-90 disabled:opacity-50 text-white font-medium rounded-lg transition-all"
-          >
-            <Sparkles className="w-5 h-5" />
-            Try Demo Account
-          </button>
-
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-jinbe-border"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-jinbe-card text-jinbe-muted">or sign in with email</span>
-            </div>
+            <h1 className="text-2xl font-semibold text-white mb-2">Entrar na sua conta</h1>
+            <p className="text-jinbe-muted">Acesse seu painel Jinbe</p>
           </div>
 
           {error && (
@@ -97,56 +53,53 @@ export default function Login() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-jinbe-muted mb-2">
-                Email
-              </label>
+              <label className="block text-sm font-medium text-jinbe-muted mb-2">E-mail corporativo</label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-jinbe-dim" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@company.com"
+                  placeholder="voce@empresa.com.br"
                   required
                   className="w-full pl-12 pr-4 py-3 bg-jinbe-bg border border-jinbe-border rounded-lg text-white placeholder-jinbe-dim focus:outline-none focus:border-jinbe-primary transition-colors"
                 />
               </div>
             </div>
 
-            {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-jinbe-muted mb-2">
-                Password
-              </label>
+              <label className="block text-sm font-medium text-jinbe-muted mb-2">Senha</label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-jinbe-dim" />
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
+                  placeholder="Sua senha"
                   required
-                  className="w-full pl-12 pr-4 py-3 bg-jinbe-bg border border-jinbe-border rounded-lg text-white placeholder-jinbe-dim focus:outline-none focus:border-jinbe-primary transition-colors"
+                  className="w-full pl-12 pr-12 py-3 bg-jinbe-bg border border-jinbe-border rounded-lg text-white placeholder-jinbe-dim focus:outline-none focus:border-jinbe-primary transition-colors"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-jinbe-dim hover:text-jinbe-muted transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
               </div>
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={isLoading || !email || !password}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-jinbe-border hover:bg-jinbe-hover disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+              className="w-full flex items-center justify-center gap-2 py-3 bg-jinbe-success hover:bg-jinbe-success/90 disabled:opacity-40 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
             >
               {isLoading ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Signing in...
-                </>
+                <Loader2 className="w-5 h-5 animate-spin" />
               ) : (
                 <>
-                  Sign In
+                  Entrar
                   <ArrowRight className="w-5 h-5" />
                 </>
               )}
@@ -155,21 +108,22 @@ export default function Login() {
 
           <div className="mt-6 text-center">
             <p className="text-jinbe-muted text-sm">
-              Don't have an account?{' '}
-              <Link
-                to="/onboarding/register"
-                className="text-jinbe-primary hover:underline"
-              >
-                Register here
+              Ainda nao tem conta?{' '}
+              <Link to="/onboarding/register" className="text-jinbe-primary hover:underline">
+                Criar conta
               </Link>
             </p>
           </div>
         </div>
 
-        {/* Help text */}
-        <p className="text-center text-jinbe-dim text-sm mt-6">
-          Demo credentials: <span className="text-jinbe-muted">demo@jinbe.com</span> / <span className="text-jinbe-muted">demo123</span>
-        </p>
+        <div className="flex justify-center gap-6 mt-6">
+          {['Autorizado pelo Banco Central', 'Sem mensalidade', 'Taxa a partir de 1,7%'].map((text) => (
+            <div key={text} className="flex items-center gap-1.5">
+              <Check className="w-3.5 h-3.5 text-jinbe-success" />
+              <span className="text-xs text-jinbe-dim">{text}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
