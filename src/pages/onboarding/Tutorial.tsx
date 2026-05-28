@@ -13,7 +13,7 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
-import logoJinbe from '@/assets/logo jinbe.png'
+import logoJinbe from '@/assets/logo-jinbe.png'
 
 interface TutorialStep {
   id: string

@@ -9,7 +9,7 @@ import {
   ArrowLeft,
   CheckCircle2,
 } from 'lucide-react'
-import logoJinbe from '@/assets/logo jinbe.png'
+import logoJinbe from '@/assets/logo-jinbe.png'
 
 interface Question {
   id: string

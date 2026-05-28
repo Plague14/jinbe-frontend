@@ -34,7 +34,7 @@ import {
   Check,
 } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
-import logoJinbe from '@/assets/logo jinbe.png'
+import logoJinbe from '@/assets/logo-jinbe.png'
 
 // ─── Types ───────────────────────────────────────────────────────
 type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7

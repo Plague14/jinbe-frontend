@@ -11,7 +11,7 @@ import {
   UserPlus,
   Sparkles,
 } from 'lucide-react'
-import logoJinbe from '@/assets/logo jinbe.png'
+import logoJinbe from '@/assets/logo-jinbe.png'
 
 const navItems = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard' },

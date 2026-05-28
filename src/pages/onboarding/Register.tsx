@@ -13,7 +13,7 @@ import {
   Loader2,
   CheckCircle2,
 } from 'lucide-react'
-import logoJinbe from '@/assets/logo jinbe.png'
+import logoJinbe from '@/assets/logo-jinbe.png'
 
 type Step = 'info' | 'credentials' | 'success'
 
