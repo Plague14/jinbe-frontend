@@ -133,7 +133,7 @@ export default function Questions() {
     <div className="min-h-screen bg-jinbe-bg flex flex-col">
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 border-b border-jinbe-border">
-        <img src={logoJinbe} alt="Jinbe" className="h-8" />
+        <img src={logoJinbe} alt="Jinbe" style={{ height: '48px' }} />
         <span className="text-sm text-jinbe-muted">
           Step {currentQuestion + 1} of {totalQuestions}
         </span>

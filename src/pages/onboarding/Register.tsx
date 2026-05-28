@@ -100,7 +100,7 @@ export default function Register() {
       <div className="relative w-full max-w-md">
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <img src={logoJinbe} alt="Jinbe" className="h-12" />
+          <img src={logoJinbe} alt="Jinbe" style={{ height: '64px' }} />
         </div>
 
         {/* Progress indicator */}

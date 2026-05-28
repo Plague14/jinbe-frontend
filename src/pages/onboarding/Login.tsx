@@ -37,7 +37,7 @@ export default function Login() {
 
       <div className="relative w-full max-w-md">
         <div className="flex justify-center mb-8">
-          <img src={logoJinbe} alt="Jinbe" className="h-12" />
+          <img src={logoJinbe} alt="Jinbe" style={{ height: '64px' }} />
         </div>
 
         <div className="bg-jinbe-card border border-jinbe-border rounded-2xl p-8">

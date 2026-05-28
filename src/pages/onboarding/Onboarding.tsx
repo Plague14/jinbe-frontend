@@ -230,7 +230,7 @@ export default function Onboarding() {
   // ─── Progress sidebar ────────────────────────────────────────
   const renderSidebar = () => (
     <aside className="w-72 min-h-screen bg-[#0c1219] border-r border-jinbe-border flex flex-col p-6 shrink-0">
-      <img src={logoJinbe} alt="Jinbe" className="h-8 w-fit mb-8" />
+      <img src={logoJinbe} alt="Jinbe" style={{ height: '48px', width: 'fit-content', marginBottom: '32px' }} />
 
       <p className="text-[11px] font-semibold text-jinbe-dim uppercase tracking-wider mb-4">
         Progresso do cadastro

@@ -40,7 +40,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     >
       {/* Logo + Close button */}
       <div className="flex items-center justify-between px-6 py-6">
-        <img src={logoJinbe} alt="Jinbe" className="h-9" />
+        <img src={logoJinbe} alt="Jinbe" style={{ height: '56px' }} />
         <button
           onClick={onClose}
           className="lg:hidden p-2 rounded-lg text-jinbe-muted hover:text-white hover:bg-jinbe-border/50 transition-colors"
