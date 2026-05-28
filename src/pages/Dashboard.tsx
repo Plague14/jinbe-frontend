@@ -43,7 +43,7 @@ export default function Dashboard() {
   return (
     <>
       <Header title="Dashboard" subtitle="PIX to SEPA Cross-border Tracking" />
-
+      
       <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8">
         {/* KPI Row */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
@@ -51,7 +51,7 @@ export default function Dashboard() {
             <KPICard key={kpi.label} {...kpi} />
           ))}
         </div>
-
+        
         {/* Chart + Activity */}
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
           <VolumeChart />

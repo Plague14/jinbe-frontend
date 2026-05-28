@@ -15,7 +15,7 @@ export function Header({ title, subtitle }: HeaderProps) {
   const { theme, toggleTheme } = useTheme()
   const isLight = theme === 'light'
   const { onMenuClick } = useOutletContext<OutletContext>()
-
+  
   return (
     <header className={`sticky top-0 z-20 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 lg:py-5 backdrop-blur-md border-b ${
       isLight
@@ -34,7 +34,7 @@ export function Header({ title, subtitle }: HeaderProps) {
         >
           <Menu className="w-5 h-5" />
         </button>
-
+        
         <div>
           <h1 className={`text-lg sm:text-xl lg:text-2xl font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>{title}</h1>
           {subtitle && (
@@ -42,7 +42,7 @@ export function Header({ title, subtitle }: HeaderProps) {
           )}
         </div>
       </div>
-
+      
       <div className="flex items-center gap-2 sm:gap-4">
         <button
           onClick={toggleTheme}

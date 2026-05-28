@@ -48,7 +48,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           <X className="w-5 h-5" />
         </button>
       </div>
-
+      
       {/* Nav */}
       <nav className="flex-1 flex flex-col gap-1 px-4 pt-2">
         {navItems.map((item) => (
