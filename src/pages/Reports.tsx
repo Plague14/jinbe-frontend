@@ -3,14 +3,12 @@ import { Header } from '@/components/layout/Header'
 import { useTheme } from '@/contexts/ThemeContext'
 import {
   TrendingUp,
-  TrendingDown,
   DollarSign,
   BarChart3,
   LineChart,
   PieChart,
   Download,
   Calendar,
-  Filter,
   Building2,
   Globe,
   FileSpreadsheet,
@@ -27,12 +25,10 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  LineChart as RechartsLineChart,
-  Line,
-  BarChart,
   Bar,
   ComposedChart,
   Legend,
+  Line,
 } from 'recharts'
 import { exportData, type ExportFormat } from '@/utils/export'
 
