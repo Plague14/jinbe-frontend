@@ -22,6 +22,7 @@ import { exportData, type ExportFormat } from '@/utils/export'
 type OperationStatus = 'completed' | 'processing' | 'pending' | 'failed' | 'cancelled'
 
 interface Operation {
+  [key: string]: string | OperationStatus
   id: string
   client: string
   beneficiary: string

@@ -326,8 +326,8 @@ export default function Reports() {
                       borderRadius: '8px',
                       color: isLight ? '#1e293b' : '#fff'
                     }}
-                    formatter={(value: number, name: string) => [
-                      `€ ${(value / 1000000).toFixed(2)}M`,
+                    formatter={(value, name) => [
+                      `€ ${(Number(value) / 1000000).toFixed(2)}M`,
                       name === 'accumulated' ? 'Acumulado' : 'Volume Mensal'
                     ]}
                   />
@@ -373,8 +373,8 @@ export default function Reports() {
                       borderRadius: '8px',
                       color: isLight ? '#1e293b' : '#fff'
                     }}
-                    formatter={(value: number, name: string) => [
-                      `R$ ${value.toFixed(3)}`,
+                    formatter={(value, name) => [
+                      `R$ ${Number(value).toFixed(3)}`,
                       name === 'rate' ? 'Taxa Mercado' : 'Taxa Aplicada'
                     ]}
                   />
