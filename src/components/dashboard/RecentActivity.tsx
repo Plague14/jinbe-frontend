@@ -14,47 +14,47 @@ const activities: ActivityItem[] = [
   {
     id: '1',
     type: 'pix_transfer',
-    title: 'PIX Transfer',
-    amount: '€1,450.00',
+    title: 'Transferência PIX',
+    amount: '€1.450,00',
     description: 'Santos & Co → Gmbh Berlin',
-    status: 'Success',
-    time: '2m ago',
+    status: 'Sucesso',
+    time: 'há 2m',
   },
   {
     id: '2',
     type: 'rate_fix',
-    title: 'Rate Fix',
+    title: 'Fixação de Taxa',
     amount: '1.0822',
-    description: 'Automatic hedging executed',
-    status: 'Processing',
-    time: '15m ago',
+    description: 'Hedge automático executado',
+    status: 'Processando',
+    time: 'há 15m',
   },
   {
     id: '3',
     type: 'sepa_payout',
-    title: 'SEPA Payout',
-    amount: '€12,000.00',
+    title: 'Pagamento SEPA',
+    amount: '€12.000,00',
     description: 'AgroTech SA → European Ag',
-    status: 'Success',
-    time: '1h ago',
+    status: 'Sucesso',
+    time: 'há 1h',
   },
   {
     id: '4',
     type: 'compliance',
-    title: 'Compliance Check',
-    amount: '€85,000.00',
-    description: 'High volume alert: Rio Import',
-    status: 'Action Required',
-    time: '2h ago',
+    title: 'Verificação Compliance',
+    amount: '€85.000,00',
+    description: 'Alerta de alto volume: Rio Import',
+    status: 'Ação Necessária',
+    time: 'há 2h',
   },
   {
     id: '5',
     type: 'settlement',
-    title: 'PIX Settlement',
-    amount: '€3,200.00',
+    title: 'Liquidação PIX',
+    amount: '€3.200,00',
     description: 'Global Logistics → Marine Ltd',
-    status: 'Success',
-    time: '3h ago',
+    status: 'Sucesso',
+    time: 'há 3h',
   },
 ]
 
@@ -72,7 +72,7 @@ export function RecentActivity() {
       <div className="flex items-center justify-between mb-4 sm:mb-6">
         <h3 className="text-base sm:text-lg font-bold text-jinbe-text">Atividade Recente</h3>
         <button className="text-xs sm:text-sm font-medium text-jinbe-primary hover:underline">
-          See all
+          Ver tudo
         </button>
       </div>
 

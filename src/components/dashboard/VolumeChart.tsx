@@ -33,7 +33,7 @@ export function VolumeChart() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h3 className="text-base sm:text-lg font-bold text-jinbe-text">Volume de Operações</h3>
-          <p className="text-xs sm:text-sm text-jinbe-dim">Monthly cross-border settlement trends</p>
+          <p className="text-xs sm:text-sm text-jinbe-dim">Tendências mensais de liquidação internacional</p>
         </div>
         <div className="flex items-center p-1 bg-jinbe-hover rounded-lg self-start sm:self-auto">
           {periods.map((p) => (

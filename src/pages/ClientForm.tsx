@@ -11,51 +11,51 @@ interface FormSection {
 
 const sections: FormSection[] = [
   {
-    title: 'Company Information',
+    title: 'Informações da Empresa',
     icon: Building2,
     fields: [
-      { label: 'Company Name', name: 'companyName', type: 'text', placeholder: 'e.g. TechCorp Brasil LTDA', required: true },
-      { label: 'Trade Name', name: 'tradeName', type: 'text', placeholder: 'e.g. TechCorp' },
+      { label: 'Razão Social', name: 'companyName', type: 'text', placeholder: 'ex: TechCorp Brasil LTDA', required: true },
+      { label: 'Nome Fantasia', name: 'tradeName', type: 'text', placeholder: 'ex: TechCorp' },
       { label: 'CNPJ', name: 'cnpj', type: 'text', placeholder: '00.000.000/0000-00', required: true },
-      { label: 'State Registration', name: 'stateReg', type: 'text', placeholder: 'Inscrição Estadual' },
-      { label: 'Industry', name: 'industry', type: 'select', placeholder: 'Select industry', options: ['Technology', 'Agriculture', 'Manufacturing', 'Financial Services', 'Import/Export', 'Other'] },
-      { label: 'Company Size', name: 'companySize', type: 'select', placeholder: 'Select size', options: ['Micro', 'Small', 'Medium', 'Large', 'Enterprise'] },
+      { label: 'Inscrição Estadual', name: 'stateReg', type: 'text', placeholder: 'Inscrição Estadual' },
+      { label: 'Setor', name: 'industry', type: 'select', placeholder: 'Selecione o setor', options: ['Tecnologia', 'Agronegócio', 'Indústria', 'Serviços Financeiros', 'Importação/Exportação', 'Outros'] },
+      { label: 'Porte da Empresa', name: 'companySize', type: 'select', placeholder: 'Selecione o porte', options: ['Micro', 'Pequena', 'Média', 'Grande', 'Enterprise'] },
     ],
   },
   {
-    title: 'Contact Information',
+    title: 'Informações de Contato',
     icon: User,
     fields: [
-      { label: 'Contact Name', name: 'contactName', type: 'text', placeholder: 'Full name', required: true },
-      { label: 'Position/Role', name: 'position', type: 'text', placeholder: 'e.g. CFO' },
-      { label: 'Email', name: 'email', type: 'email', placeholder: 'email@company.com.br', required: true },
-      { label: 'Phone', name: 'phone', type: 'tel', placeholder: '+55 11 0000-0000', required: true },
-      { label: 'Address', name: 'address', type: 'text', placeholder: 'Street address', colSpan: 2 },
-      { label: 'City', name: 'city', type: 'text', placeholder: 'City', required: true },
-      { label: 'State', name: 'state', type: 'text', placeholder: 'UF' },
-      { label: 'ZIP Code', name: 'zip', type: 'text', placeholder: '00000-000' },
+      { label: 'Nome do Contato', name: 'contactName', type: 'text', placeholder: 'Nome completo', required: true },
+      { label: 'Cargo', name: 'position', type: 'text', placeholder: 'ex: CFO' },
+      { label: 'E-mail', name: 'email', type: 'email', placeholder: 'email@empresa.com.br', required: true },
+      { label: 'Telefone', name: 'phone', type: 'tel', placeholder: '+55 11 0000-0000', required: true },
+      { label: 'Endereço', name: 'address', type: 'text', placeholder: 'Rua e número', colSpan: 2 },
+      { label: 'Cidade', name: 'city', type: 'text', placeholder: 'Cidade', required: true },
+      { label: 'Estado', name: 'state', type: 'text', placeholder: 'UF' },
+      { label: 'CEP', name: 'zip', type: 'text', placeholder: '00000-000' },
     ],
   },
   {
-    title: 'Compliance & Documents',
+    title: 'Compliance e Documentos',
     icon: FileText,
     fields: [
-      { label: 'Expected Monthly Volume (BRL)', name: 'monthlyVolume', type: 'text', placeholder: 'R$ 0.00', required: true },
-      { label: 'Expected Operations/Month', name: 'monthlyOps', type: 'number', placeholder: '0' },
-      { label: 'Purpose of Transfers', name: 'purpose', type: 'select', placeholder: 'Select purpose', options: ['Supplier Payments', 'Service Fees', 'Royalties', 'Dividends', 'Trade Finance', 'Other'], required: true },
-      { label: 'Risk Category', name: 'riskCategory', type: 'select', placeholder: 'Assign risk level', options: ['Low', 'Medium', 'High'] },
+      { label: 'Volume Mensal Esperado (BRL)', name: 'monthlyVolume', type: 'text', placeholder: 'R$ 0,00', required: true },
+      { label: 'Operações/Mês Esperadas', name: 'monthlyOps', type: 'number', placeholder: '0' },
+      { label: 'Finalidade das Transferências', name: 'purpose', type: 'select', placeholder: 'Selecione a finalidade', options: ['Pagamento a Fornecedores', 'Taxas de Serviço', 'Royalties', 'Dividendos', 'Financiamento Comercial', 'Outros'], required: true },
+      { label: 'Categoria de Risco', name: 'riskCategory', type: 'select', placeholder: 'Atribuir nível de risco', options: ['Baixo', 'Médio', 'Alto'] },
     ],
   },
   {
-    title: 'Bank Account (PIX)',
+    title: 'Conta Bancária (PIX)',
     icon: CreditCard,
     fields: [
-      { label: 'Bank Name', name: 'bankName', type: 'text', placeholder: 'e.g. Banco do Brasil', required: true },
-      { label: 'Bank Code', name: 'bankCode', type: 'text', placeholder: '001' },
-      { label: 'Agency', name: 'agency', type: 'text', placeholder: '0000', required: true },
-      { label: 'Account Number', name: 'accountNumber', type: 'text', placeholder: '00000-0', required: true },
-      { label: 'PIX Key', name: 'pixKey', type: 'text', placeholder: 'CNPJ, email or phone', required: true },
-      { label: 'PIX Key Type', name: 'pixKeyType', type: 'select', placeholder: 'Select type', options: ['CNPJ', 'Email', 'Phone', 'Random Key'], required: true },
+      { label: 'Nome do Banco', name: 'bankName', type: 'text', placeholder: 'ex: Banco do Brasil', required: true },
+      { label: 'Código do Banco', name: 'bankCode', type: 'text', placeholder: '001' },
+      { label: 'Agência', name: 'agency', type: 'text', placeholder: '0000', required: true },
+      { label: 'Número da Conta', name: 'accountNumber', type: 'text', placeholder: '00000-0', required: true },
+      { label: 'Chave PIX', name: 'pixKey', type: 'text', placeholder: 'CNPJ, e-mail ou telefone', required: true },
+      { label: 'Tipo da Chave PIX', name: 'pixKeyType', type: 'select', placeholder: 'Selecione o tipo', options: ['CNPJ', 'E-mail', 'Telefone', 'Chave Aleatória'], required: true },
     ],
   },
 ]
@@ -75,7 +75,7 @@ export default function ClientForm() {
 
   return (
     <>
-      <Header title="Register Client" subtitle="Add a new client to the platform" />
+      <Header title="Cadastrar Cliente" subtitle="Adicionar um novo cliente à plataforma" />
 
       <div className="p-8">
         <form onSubmit={handleSubmit} className="max-w-4xl flex flex-col gap-8">
@@ -85,7 +85,7 @@ export default function ClientForm() {
             className="flex items-center gap-2 text-sm text-jinbe-muted hover:text-white transition-colors w-fit"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Clients
+            Voltar para Clientes
           </Link>
 
           {/* Sections */}
@@ -141,14 +141,14 @@ export default function ClientForm() {
               to="/clients"
               className="px-5 py-2.5 border border-jinbe-border text-jinbe-muted hover:text-white text-sm font-medium rounded-lg transition-colors"
             >
-              Cancel
+              Cancelar
             </Link>
             <button
               type="submit"
               className="flex items-center gap-2 px-6 py-2.5 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white text-sm font-semibold rounded-lg transition-colors"
             >
               <Save className="w-4 h-4" />
-              Register Client
+              Cadastrar Cliente
             </button>
           </div>
         </form>

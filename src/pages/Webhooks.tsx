@@ -39,18 +39,18 @@ const mockWebhooks: WebhookType[] = [
 const availableEvents: { value: WebhookEvent; label: string; description: string }[] = [
   {
     value: 'customer.verification.updated',
-    label: 'Verification Updated',
-    description: 'When customer verification status changes',
+    label: 'Verificação Atualizada',
+    description: 'Quando o status de verificação do customer muda',
   },
   {
     value: 'customer.tos.updated',
-    label: 'ToS Updated',
-    description: 'When customer signs or needs to sign terms',
+    label: 'Termos Atualizados',
+    description: 'Quando o customer assina ou precisa assinar os termos',
   },
   {
     value: 'customer.status.updated',
-    label: 'Status Updated',
-    description: 'When customer status changes (active, pending, etc.)',
+    label: 'Status Atualizado',
+    description: 'Quando o status do customer muda (ativo, pendente, etc.)',
   },
 ]
 
@@ -99,12 +99,12 @@ export default function Webhooks() {
     setFormError('')
 
     if (!formData.url.startsWith('https://')) {
-      setFormError('Webhook URL must use HTTPS')
+      setFormError('A URL do webhook deve usar HTTPS')
       return
     }
 
     if (formData.events.length === 0) {
-      setFormError('Select at least one event')
+      setFormError('Selecione pelo menos um evento')
       return
     }
 
@@ -134,7 +134,7 @@ export default function Webhooks() {
   }
 
   const handleDelete = async (webhookId: string) => {
-    if (!confirm('Are you sure you want to delete this webhook?')) return
+    if (!confirm('Tem certeza que deseja excluir este webhook?')) return
 
     setDeletingId(webhookId)
 
@@ -157,7 +157,7 @@ export default function Webhooks() {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    return new Date(dateString).toLocaleDateString('pt-BR', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -173,10 +173,10 @@ export default function Webhooks() {
         <div className="mb-6 p-4 bg-jinbe-info/10 border border-jinbe-info/20 rounded-xl flex items-start gap-3">
           <Shield className="w-5 h-5 text-jinbe-info flex-shrink-0 mt-0.5" />
           <div>
-            <p className="text-white font-medium mb-1">Webhook Security</p>
+            <p className="text-white font-medium mb-1">Segurança de Webhooks</p>
             <p className="text-sm text-jinbe-muted">
-              All webhooks are signed using HMAC-SHA256. Validate the X-Urban-Signature header to
-              ensure requests are authentic. Webhook secrets are only shown once during creation.
+              Todos os webhooks são assinados usando HMAC-SHA256. Valide o header X-Urban-Signature para
+              garantir que as requisições são autênticas. Os secrets dos webhooks são mostrados apenas uma vez durante a criação.
             </p>
           </div>
         </div>
@@ -184,14 +184,14 @@ export default function Webhooks() {
         {/* Actions bar */}
         <div className="flex justify-between items-center mb-6">
           <p className="text-jinbe-muted">
-            {webhooks.length} webhook{webhooks.length !== 1 ? 's' : ''} configured
+            {webhooks.length} webhook{webhooks.length !== 1 ? 's' : ''} configurado{webhooks.length !== 1 ? 's' : ''}
           </p>
           <button
             onClick={() => setShowModal(true)}
             className="flex items-center gap-2 px-6 py-3 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white font-medium rounded-lg transition-colors"
           >
             <Plus className="w-5 h-5" />
-            New Webhook
+            Novo Webhook
           </button>
         </div>
 
@@ -206,16 +206,16 @@ export default function Webhooks() {
         {!isLoading && webhooks.length === 0 && (
           <div className="text-center py-12">
             <Webhook className="w-12 h-12 text-jinbe-dim mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-white mb-2">No webhooks configured</h3>
+            <h3 className="text-lg font-medium text-white mb-2">Nenhum webhook configurado</h3>
             <p className="text-jinbe-muted mb-6">
-              Set up webhooks to receive real-time notifications about customer events
+              Configure webhooks para receber notificações em tempo real sobre eventos de customers
             </p>
             <button
               onClick={() => setShowModal(true)}
               className="inline-flex items-center gap-2 px-6 py-3 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white font-medium rounded-lg transition-colors"
             >
               <Plus className="w-5 h-5" />
-              Create Webhook
+              Criar Webhook
             </button>
           </div>
         )}
@@ -281,7 +281,7 @@ export default function Webhooks() {
                     ) : (
                       <Trash2 className="w-4 h-4" />
                     )}
-                    Delete
+                    Excluir
                   </button>
                 </div>
 
@@ -297,7 +297,7 @@ export default function Webhooks() {
                   ))}
                 </div>
 
-                <p className="text-xs text-jinbe-dim">Created {formatDate(webhook.created_at)}</p>
+                <p className="text-xs text-jinbe-dim">Criado em {formatDate(webhook.created_at)}</p>
               </div>
             ))}
           </div>
@@ -312,7 +312,7 @@ export default function Webhooks() {
             {/* Modal header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-jinbe-border">
               <h2 className="text-lg font-semibold text-white">
-                {newSecret ? 'Webhook Created' : 'Create Webhook'}
+                {newSecret ? 'Webhook Criado' : 'Criar Webhook'}
               </h2>
               <button
                 onClick={closeModal}
@@ -331,16 +331,16 @@ export default function Webhooks() {
                       <CheckCircle2 className="w-6 h-6 text-jinbe-success" />
                     </div>
                     <div>
-                      <p className="text-white font-medium">Webhook created successfully!</p>
+                      <p className="text-white font-medium">Webhook criado com sucesso!</p>
                       <p className="text-sm text-jinbe-muted">
-                        Save your webhook secret - it won't be shown again
+                        Salve seu secret do webhook - ele não será mostrado novamente
                       </p>
                     </div>
                   </div>
 
                   <div className="p-4 bg-jinbe-warning/10 border border-jinbe-warning/20 rounded-lg">
                     <p className="text-sm text-jinbe-warning font-medium mb-2">
-                      Webhook Secret (save this now!)
+                      Secret do Webhook (salve agora!)
                     </p>
                     <div className="flex items-center gap-2">
                       <code className="flex-1 p-3 bg-jinbe-bg rounded-lg text-white text-sm font-mono break-all">
@@ -373,7 +373,7 @@ export default function Webhooks() {
                     onClick={closeModal}
                     className="w-full py-3 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white font-medium rounded-lg transition-colors"
                   >
-                    Done
+                    Concluído
                   </button>
                 </div>
               ) : (
@@ -398,13 +398,13 @@ export default function Webhooks() {
                       required
                       className="w-full px-4 py-3 bg-jinbe-bg border border-jinbe-border rounded-lg text-white placeholder-jinbe-dim focus:outline-none focus:border-jinbe-primary transition-colors"
                     />
-                    <p className="text-xs text-jinbe-dim mt-1">Must use HTTPS</p>
+                    <p className="text-xs text-jinbe-dim mt-1">Deve usar HTTPS</p>
                   </div>
 
                   {/* Description */}
                   <div>
                     <label className="block text-sm font-medium text-jinbe-muted mb-2">
-                      Description (optional)
+                      Descrição (opcional)
                     </label>
                     <input
                       type="text"
@@ -418,7 +418,7 @@ export default function Webhooks() {
                   {/* Events */}
                   <div>
                     <label className="block text-sm font-medium text-jinbe-muted mb-2">
-                      Events *
+                      Eventos *
                     </label>
                     <div className="space-y-2">
                       {availableEvents.map((event) => (
@@ -458,7 +458,7 @@ export default function Webhooks() {
                       onClick={closeModal}
                       className="flex-1 py-3 bg-jinbe-border hover:bg-jinbe-hover text-white font-medium rounded-lg transition-colors"
                     >
-                      Cancel
+                      Cancelar
                     </button>
                     <button
                       type="submit"
@@ -468,10 +468,10 @@ export default function Webhooks() {
                       {isSubmitting ? (
                         <>
                           <Loader2 className="w-5 h-5 animate-spin" />
-                          Creating...
+                          Criando...
                         </>
                       ) : (
-                        'Create Webhook'
+                        'Criar Webhook'
                       )}
                     </button>
                   </div>

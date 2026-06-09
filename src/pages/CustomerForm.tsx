@@ -52,11 +52,11 @@ export default function CustomerForm() {
 
     // Validate spreads
     if (!validateSpread(formData.digitalAssetsSpread)) {
-      setError('Digital Assets spread must be between 0.00 and 5.00')
+      setError('O spread de Digital Assets deve estar entre 0.00 e 5.00')
       return
     }
     if (!validateSpread(formData.globalPaymentsSpread)) {
-      setError('Global Payments spread must be between 0.00 and 5.00')
+      setError('O spread de Global Payments deve estar entre 0.00 e 5.00')
       return
     }
 
@@ -90,14 +90,14 @@ export default function CustomerForm() {
   if (success) {
     return (
       <div className="min-h-screen bg-jinbe-bg">
-        <Header title="New Customer" />
+        <Header title="Novo Customer" />
         <div className="flex items-center justify-center px-4 py-20">
           <div className="text-center">
             <div className="w-20 h-20 rounded-full bg-jinbe-success/20 flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="w-10 h-10 text-jinbe-success" />
             </div>
-            <h2 className="text-2xl font-semibold text-white mb-2">Customer Created!</h2>
-            <p className="text-jinbe-muted">Redirecting to customers list...</p>
+            <h2 className="text-2xl font-semibold text-white mb-2">Customer Criado!</h2>
+            <p className="text-jinbe-muted">Redirecionando para a lista de customers...</p>
           </div>
         </div>
       </div>
@@ -106,7 +106,7 @@ export default function CustomerForm() {
 
   return (
     <div className="min-h-screen bg-jinbe-bg">
-      <Header title="New Customer" />
+      <Header title="Novo Customer" />
 
       <div className="px-4 sm:px-6 py-6 max-w-2xl mx-auto">
         {/* Back button */}
@@ -115,12 +115,12 @@ export default function CustomerForm() {
           className="flex items-center gap-2 text-jinbe-muted hover:text-white mb-6 transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
-          Back to Customers
+          Voltar para Customers
         </button>
 
         {/* Form card */}
         <div className="bg-jinbe-card border border-jinbe-border rounded-xl p-6">
-          <h2 className="text-xl font-semibold text-white mb-6">Create New Customer</h2>
+          <h2 className="text-xl font-semibold text-white mb-6">Criar Novo Customer</h2>
 
           {error && (
             <div className="mb-6 p-4 bg-jinbe-danger/10 border border-jinbe-danger/20 rounded-lg flex items-start gap-3">
@@ -133,7 +133,7 @@ export default function CustomerForm() {
             {/* Email */}
             <div>
               <label className="block text-sm font-medium text-jinbe-muted mb-2">
-                Email Address *
+                Endereço de E-mail *
               </label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-jinbe-dim" />
@@ -151,7 +151,7 @@ export default function CustomerForm() {
             {/* Customer Type */}
             <div>
               <label className="block text-sm font-medium text-jinbe-muted mb-2">
-                Customer Type *
+                Tipo de Customer *
               </label>
               <div className="grid grid-cols-2 gap-4">
                 <button
@@ -175,8 +175,8 @@ export default function CustomerForm() {
                     />
                   </div>
                   <div className="text-left">
-                    <p className="font-medium text-white">Individual</p>
-                    <p className="text-xs text-jinbe-muted">Person</p>
+                    <p className="font-medium text-white">Pessoa Física</p>
+                    <p className="text-xs text-jinbe-muted">Individual</p>
                   </div>
                 </button>
 
@@ -201,8 +201,8 @@ export default function CustomerForm() {
                     />
                   </div>
                   <div className="text-left">
-                    <p className="font-medium text-white">Business</p>
-                    <p className="text-xs text-jinbe-muted">Company</p>
+                    <p className="font-medium text-white">Empresa</p>
+                    <p className="text-xs text-jinbe-muted">Pessoa Jurídica</p>
                   </div>
                 </button>
               </div>
@@ -212,7 +212,7 @@ export default function CustomerForm() {
             <div className="p-4 bg-jinbe-bg/50 rounded-lg">
               <h3 className="text-sm font-medium text-white mb-4 flex items-center gap-2">
                 <Percent className="w-4 h-4 text-jinbe-primary" />
-                Spread Configuration
+                Configuração de Spread
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -233,7 +233,7 @@ export default function CustomerForm() {
                     />
                     <span className="absolute right-4 top-1/2 -translate-y-1/2 text-jinbe-dim">%</span>
                   </div>
-                  <p className="text-xs text-jinbe-dim mt-1">Range: 0.00 - 5.00</p>
+                  <p className="text-xs text-jinbe-dim mt-1">Intervalo: 0.00 - 5.00</p>
                 </div>
 
                 <div>
@@ -253,7 +253,7 @@ export default function CustomerForm() {
                     />
                     <span className="absolute right-4 top-1/2 -translate-y-1/2 text-jinbe-dim">%</span>
                   </div>
-                  <p className="text-xs text-jinbe-dim mt-1">Range: 0.00 - 5.00</p>
+                  <p className="text-xs text-jinbe-dim mt-1">Intervalo: 0.00 - 5.00</p>
                 </div>
               </div>
             </div>
@@ -265,7 +265,7 @@ export default function CustomerForm() {
                 onClick={() => navigate('/customers')}
                 className="flex-1 py-3 bg-jinbe-border hover:bg-jinbe-hover text-white font-medium rounded-lg transition-colors"
               >
-                Cancel
+                Cancelar
               </button>
               <button
                 type="submit"
@@ -275,10 +275,10 @@ export default function CustomerForm() {
                 {isLoading ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    Creating...
+                    Criando...
                   </>
                 ) : (
-                  'Create Customer'
+                  'Criar Customer'
                 )}
               </button>
             </div>

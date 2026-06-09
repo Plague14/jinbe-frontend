@@ -85,15 +85,15 @@ const mockCustomers: Customer[] = [
 ]
 
 const statusConfig = {
-  active: { label: 'Active', color: 'bg-jinbe-success/20 text-jinbe-success', icon: CheckCircle2 },
-  pending: { label: 'Pending', color: 'bg-jinbe-warning/20 text-jinbe-warning', icon: Clock },
-  suspended: { label: 'Suspended', color: 'bg-jinbe-danger/20 text-jinbe-danger', icon: XCircle },
+  active: { label: 'Ativo', color: 'bg-jinbe-success/20 text-jinbe-success', icon: CheckCircle2 },
+  pending: { label: 'Pendente', color: 'bg-jinbe-warning/20 text-jinbe-warning', icon: Clock },
+  suspended: { label: 'Suspenso', color: 'bg-jinbe-danger/20 text-jinbe-danger', icon: XCircle },
 }
 
 const verificationConfig = {
-  approved: { label: 'Approved', color: 'text-jinbe-success' },
-  pending: { label: 'Pending', color: 'text-jinbe-warning' },
-  rejected: { label: 'Rejected', color: 'text-jinbe-danger' },
+  approved: { label: 'Aprovado', color: 'text-jinbe-success' },
+  pending: { label: 'Pendente', color: 'text-jinbe-warning' },
+  rejected: { label: 'Rejeitado', color: 'text-jinbe-danger' },
 }
 
 export default function Customers() {
@@ -133,7 +133,7 @@ export default function Customers() {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    return new Date(dateString).toLocaleDateString('pt-BR', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -151,7 +151,7 @@ export default function Customers() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-jinbe-dim" />
             <input
               type="text"
-              placeholder="Search by ID or email..."
+              placeholder="Buscar por ID ou e-mail..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-12 pr-4 py-3 bg-jinbe-card border border-jinbe-border rounded-lg text-white placeholder-jinbe-dim focus:outline-none focus:border-jinbe-primary transition-colors"
@@ -162,7 +162,7 @@ export default function Customers() {
             className="flex items-center justify-center gap-2 px-6 py-3 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white font-medium rounded-lg transition-colors"
           >
             <Plus className="w-5 h-5" />
-            New Customer
+            Novo Customer
           </Link>
         </div>
 
@@ -177,11 +177,11 @@ export default function Customers() {
         {!isLoading && filteredCustomers.length === 0 && (
           <div className="text-center py-12">
             <AlertCircle className="w-12 h-12 text-jinbe-dim mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-white mb-2">No customers found</h3>
+            <h3 className="text-lg font-medium text-white mb-2">Nenhum customer encontrado</h3>
             <p className="text-jinbe-muted mb-6">
               {searchQuery
-                ? 'Try adjusting your search query'
-                : 'Get started by creating your first customer'}
+                ? 'Tente ajustar sua busca'
+                : 'Comece criando seu primeiro customer'}
             </p>
             {!searchQuery && (
               <Link
@@ -189,7 +189,7 @@ export default function Customers() {
                 className="inline-flex items-center gap-2 px-6 py-3 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white font-medium rounded-lg transition-colors"
               >
                 <Plus className="w-5 h-5" />
-                Create Customer
+                Criar Customer
               </Link>
             )}
           </div>
@@ -255,25 +255,25 @@ export default function Customers() {
                   {/* Criteria */}
                   <div className="grid grid-cols-3 gap-4 mb-4 p-4 bg-jinbe-bg/50 rounded-lg">
                     <div>
-                      <p className="text-xs text-jinbe-dim mb-1">Verification</p>
+                      <p className="text-xs text-jinbe-dim mb-1">Verificação</p>
                       <p className={`text-sm font-medium ${verificationConfig[customer.criteria.verification].color}`}>
                         {verificationConfig[customer.criteria.verification].label}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-jinbe-dim mb-1">ToS</p>
+                      <p className="text-xs text-jinbe-dim mb-1">Termos</p>
                       <p className={`text-sm font-medium ${
                         customer.criteria.tos === 'signed' ? 'text-jinbe-success' : 'text-jinbe-warning'
                       }`}>
-                        {customer.criteria.tos === 'signed' ? 'Signed' : 'Not Signed'}
+                        {customer.criteria.tos === 'signed' ? 'Assinado' : 'Não Assinado'}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-jinbe-dim mb-1">Operational</p>
+                      <p className="text-xs text-jinbe-dim mb-1">Operacional</p>
                       <p className={`text-sm font-medium ${
                         customer.criteria.operational === 'enabled' ? 'text-jinbe-success' : 'text-jinbe-muted'
                       }`}>
-                        {customer.criteria.operational === 'enabled' ? 'Enabled' : 'Disabled'}
+                        {customer.criteria.operational === 'enabled' ? 'Habilitado' : 'Desabilitado'}
                       </p>
                     </div>
                   </div>
@@ -313,7 +313,7 @@ export default function Customers() {
                   {/* Footer */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-jinbe-border">
                     <p className="text-sm text-jinbe-dim">
-                      Created {formatDate(customer.created_at)}
+                      Criado em {formatDate(customer.created_at)}
                     </p>
                     <div className="flex gap-2">
                       {customer.criteria.verification !== 'approved' && (
@@ -327,14 +327,14 @@ export default function Customers() {
                           ) : (
                             <ExternalLink className="w-4 h-4" />
                           )}
-                          Generate Verification Link
+                          Gerar Link de Verificação
                         </button>
                       )}
                       <Link
                         to={`/customers/${customer.id}`}
                         className="flex items-center gap-2 px-4 py-2 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white text-sm font-medium rounded-lg transition-colors"
                       >
-                        View Details
+                        Ver Detalhes
                       </Link>
                     </div>
                   </div>

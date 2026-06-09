@@ -33,9 +33,9 @@ interface Client {
 }
 
 const statusConfig: Record<ClientStatus, { label: string; icon: typeof CheckCircle2; className: string }> = {
-  active: { label: 'Active', icon: CheckCircle2, className: 'text-jinbe-success' },
-  pending: { label: 'Pending', icon: Clock, className: 'text-jinbe-warning' },
-  suspended: { label: 'Suspended', icon: XCircle, className: 'text-jinbe-danger' },
+  active: { label: 'Ativo', icon: CheckCircle2, className: 'text-jinbe-success' },
+  pending: { label: 'Pendente', icon: Clock, className: 'text-jinbe-warning' },
+  suspended: { label: 'Suspenso', icon: XCircle, className: 'text-jinbe-danger' },
 }
 
 const mockClients: Client[] = [
@@ -61,7 +61,7 @@ export default function Clients() {
 
   return (
     <>
-      <Header title="Client Directory" subtitle="Manage clients and bank accounts" />
+      <Header title="Diretório de Clientes" subtitle="Gerencie clientes e contas bancárias" />
 
       <div className="flex flex-col gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8">
         {/* Toolbar */}
@@ -70,7 +70,7 @@ export default function Clients() {
             <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`} />
             <input
               type="text"
-              placeholder="Search by name, CNPJ or email..."
+              placeholder="Buscar por nome, CNPJ ou e-mail..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className={`w-full sm:w-[280px] lg:w-[320px] pl-10 pr-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:border-jinbe-primary ${
@@ -85,8 +85,8 @@ export default function Clients() {
             className="flex items-center justify-center gap-2 px-5 py-2.5 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white text-sm font-semibold rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
-            <span className="hidden sm:inline">Register Client</span>
-            <span className="sm:hidden">Register</span>
+            <span className="hidden sm:inline">Cadastrar Cliente</span>
+            <span className="sm:hidden">Cadastrar</span>
           </Link>
         </div>
 
@@ -155,7 +155,7 @@ export default function Clients() {
                       <p className={`text-xs sm:text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>{client.opsCount}</p>
                     </div>
                     <div className="hidden sm:block">
-                      <p className={`text-xs ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`}>Last Op</p>
+                      <p className={`text-xs ${isLight ? 'text-slate-400' : 'text-jinbe-dim'}`}>Última Op</p>
                       <p className={`text-sm font-semibold ${isLight ? 'text-slate-500' : 'text-jinbe-muted'}`}>{client.lastOp}</p>
                     </div>
                   </div>
@@ -163,7 +163,7 @@ export default function Clients() {
                     to={`/clients/${client.id}`}
                     className="flex items-center gap-1 text-xs font-medium text-jinbe-primary hover:text-jinbe-primary/80 transition-colors"
                   >
-                    View
+                    Ver
                     <ChevronRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>

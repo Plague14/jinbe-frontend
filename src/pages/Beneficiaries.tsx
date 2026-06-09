@@ -31,8 +31,8 @@ interface Beneficiary {
 }
 
 const statusConfig: Record<BeneficiaryStatus, { label: string; className: string }> = {
-  verified: { label: 'Verified', className: 'bg-jinbe-success/10 text-jinbe-success' },
-  pending_verification: { label: 'Pending', className: 'bg-jinbe-warning/10 text-jinbe-warning' },
+  verified: { label: 'Verificado', className: 'bg-jinbe-success/10 text-jinbe-success' },
+  pending_verification: { label: 'Pendente', className: 'bg-jinbe-warning/10 text-jinbe-warning' },
 }
 
 const mockBeneficiaries: Beneficiary[] = [
@@ -64,7 +64,7 @@ export default function Beneficiaries() {
 
   return (
     <>
-      <Header title="Beneficiaries" subtitle="European SEPA beneficiary directory" />
+      <Header title="Beneficiários" subtitle="Diretório de beneficiários SEPA europeus" />
 
       <div className="flex flex-col gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8">
         {/* Toolbar */}
@@ -73,7 +73,7 @@ export default function Beneficiaries() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-jinbe-dim" />
             <input
               type="text"
-              placeholder="Search by name, IBAN, bank..."
+              placeholder="Buscar por nome, IBAN, banco..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full sm:w-[280px] lg:w-[340px] pl-10 pr-4 py-2.5 bg-jinbe-card border border-jinbe-border rounded-lg text-sm text-white placeholder:text-jinbe-dim focus:outline-none focus:border-jinbe-primary"
@@ -84,8 +84,8 @@ export default function Beneficiaries() {
             className="flex items-center justify-center gap-2 px-5 py-2.5 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white text-sm font-semibold rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
-            <span className="hidden sm:inline">New Beneficiary</span>
-            <span className="sm:hidden">New</span>
+            <span className="hidden sm:inline">Novo Beneficiário</span>
+            <span className="sm:hidden">Novo</span>
           </Link>
         </div>
 
@@ -131,11 +131,11 @@ export default function Beneficiaries() {
 
               <div className="flex items-center justify-between pt-3 border-t border-jinbe-border">
                 <div>
-                  <p className="text-[10px] text-jinbe-dim">Total Received</p>
+                  <p className="text-[10px] text-jinbe-dim">Total Recebido</p>
                   <p className="text-sm font-semibold text-jinbe-text">{b.totalReceived}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-[10px] text-jinbe-dim">Clients</p>
+                  <p className="text-[10px] text-jinbe-dim">Clientes</p>
                   <p className="text-sm font-semibold text-jinbe-text">{b.linkedClients}</p>
                 </div>
                 <button className="p-2 rounded-lg text-jinbe-dim hover:text-white hover:bg-jinbe-border/50 transition-colors">
@@ -152,7 +152,7 @@ export default function Beneficiaries() {
             <table className="w-full">
               <thead>
                 <tr className="bg-jinbe-sidebar border-b border-jinbe-border">
-                  {['Beneficiary', 'IBAN', 'BIC / Bank', 'Country', 'Status', 'Clients', 'Total Received', ''].map((col) => (
+                  {['Beneficiário', 'IBAN', 'BIC / Banco', 'País', 'Status', 'Clientes', 'Total Recebido', ''].map((col) => (
                     <th key={col} className="px-5 py-3.5 text-left text-xs font-semibold text-jinbe-dim uppercase tracking-wider whitespace-nowrap">
                       {col && (
                         <span className="flex items-center gap-1.5 cursor-pointer hover:text-jinbe-muted">
@@ -222,7 +222,7 @@ export default function Beneficiaries() {
         {/* Pagination */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs sm:text-sm text-jinbe-dim order-2 sm:order-1">
-            Showing <span className="text-jinbe-text font-medium">{filtered.length}</span> beneficiaries
+            Exibindo <span className="text-jinbe-text font-medium">{filtered.length}</span> beneficiários
           </p>
           <div className="flex items-center gap-1 order-1 sm:order-2">
             <button className="p-2 rounded-lg text-jinbe-dim hover:text-white hover:bg-jinbe-border/50 transition-colors">

@@ -7,32 +7,32 @@ import { RecentActivity } from '@/components/dashboard/RecentActivity'
 const kpis = [
   {
     label: 'Volume',
-    value: '€1,250,400',
-    change: '+12% vs last month',
+    value: '€1.250.400',
+    change: '+12% vs mês anterior',
     trend: 'up' as const,
     icon: DollarSign,
     iconBg: 'bg-jinbe-primary/10 text-jinbe-primary',
   },
   {
-    label: 'Ops Count',
+    label: 'Operações',
     value: '450',
-    change: '-2% vs last month',
+    change: '-2% vs mês anterior',
     trend: 'down' as const,
     icon: Hash,
     iconBg: 'bg-jinbe-info/10 text-jinbe-info',
   },
   {
-    label: 'Avg Rate',
+    label: 'Taxa Média',
     value: '1.0825',
-    change: '+0.5% vs avg',
+    change: '+0.5% vs média',
     trend: 'up' as const,
     icon: TrendingUp,
     iconBg: 'bg-jinbe-success/10 text-jinbe-success',
   },
   {
-    label: 'Avg Time',
+    label: 'Tempo Médio',
     value: '14m 20s',
-    change: '-5% faster',
+    change: '-5% mais rápido',
     trend: 'up' as const,
     icon: Clock,
     iconBg: 'bg-jinbe-warning/10 text-jinbe-warning',
@@ -42,7 +42,7 @@ const kpis = [
 export default function Dashboard() {
   return (
     <>
-      <Header title="Dashboard" subtitle="PIX to SEPA Cross-border Tracking" />
+      <Header title="Painel" subtitle="Acompanhamento de operações PIX para SEPA" />
       
       <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8">
         {/* KPI Row */}

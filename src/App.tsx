@@ -11,7 +11,9 @@ import Beneficiaries from '@/pages/Beneficiaries'
 import BeneficiaryForm from '@/pages/BeneficiaryForm'
 import Webhooks from '@/pages/Webhooks'
 import Metrics from '@/pages/Metrics'
+import Reports from '@/pages/Reports'
 import Settings from '@/pages/Settings'
+import AdminPanel from '@/pages/AdminPanel'
 
 // Onboarding pages
 import Login from '@/pages/onboarding/Login'
@@ -38,6 +40,8 @@ export default function App() {
           <Route path="beneficiaries/new" element={<BeneficiaryForm />} />
           <Route path="webhooks" element={<Webhooks />} />
           <Route path="metrics" element={<Metrics />} />
+          <Route path="reports" element={<Reports />} />
+          <Route path="admin" element={<AdminPanel />} />
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>

@@ -27,10 +27,10 @@ import {
 } from 'recharts'
 
 const kpis = [
-  { label: 'Total Volume', value: '€ 8.74M', change: '+18.3%', trend: 'up' as const, icon: DollarSign, iconBg: 'bg-jinbe-primary/10 text-jinbe-primary' },
-  { label: 'Operations', value: '1,247', change: '+8.5%', trend: 'up' as const, icon: Hash, iconBg: 'bg-jinbe-info/10 text-jinbe-info' },
-  { label: 'Avg Rate', value: '5.4325', change: '-0.2%', trend: 'down' as const, icon: TrendingUp, iconBg: 'bg-jinbe-success/10 text-jinbe-success' },
-  { label: 'Avg Time', value: '12m 45s', change: '-12%', trend: 'up' as const, icon: Clock, iconBg: 'bg-jinbe-warning/10 text-jinbe-warning' },
+  { label: 'Volume Total', value: '€ 8.74M', change: '+18.3%', trend: 'up' as const, icon: DollarSign, iconBg: 'bg-jinbe-primary/10 text-jinbe-primary' },
+  { label: 'Operações', value: '1,247', change: '+8.5%', trend: 'up' as const, icon: Hash, iconBg: 'bg-jinbe-info/10 text-jinbe-info' },
+  { label: 'Taxa Média', value: '5.4325', change: '-0.2%', trend: 'down' as const, icon: TrendingUp, iconBg: 'bg-jinbe-success/10 text-jinbe-success' },
+  { label: 'Tempo Médio', value: '12m 45s', change: '-12%', trend: 'up' as const, icon: Clock, iconBg: 'bg-jinbe-warning/10 text-jinbe-warning' },
 ]
 
 const volumeData = [
@@ -53,10 +53,10 @@ const rateData = [
 ]
 
 const statusDistribution = [
-  { name: 'Completed', value: 1089, color: '#10b981' },
-  { name: 'Processing', value: 87, color: '#0d7ff2' },
-  { name: 'Pending', value: 42, color: '#f59e0b' },
-  { name: 'Failed', value: 29, color: '#f43f5e' },
+  { name: 'Concluídas', value: 1089, color: '#10b981' },
+  { name: 'Processando', value: 87, color: '#0d7ff2' },
+  { name: 'Pendentes', value: 42, color: '#f59e0b' },
+  { name: 'Falhas', value: 29, color: '#f43f5e' },
 ]
 
 const topClients = [
@@ -68,11 +68,11 @@ const topClients = [
 ]
 
 const corridors = [
-  { route: 'BRL → EUR (DE)', volume: '€ 2.89M', change: '+22%', up: true },
-  { route: 'BRL → EUR (FR)', volume: '€ 1.92M', change: '+15%', up: true },
-  { route: 'BRL → EUR (NL)', volume: '€ 1.34M', change: '+8%', up: true },
-  { route: 'BRL → EUR (ES)', volume: '€ 980K', change: '-3%', up: false },
-  { route: 'BRL → CHF (CH)', volume: '€ 670K', change: '+31%', up: true },
+  { route: 'BRL → EUR (Alemanha)', volume: '€ 2.89M', change: '+22%', up: true },
+  { route: 'BRL → EUR (França)', volume: '€ 1.92M', change: '+15%', up: true },
+  { route: 'BRL → EUR (Holanda)', volume: '€ 1.34M', change: '+8%', up: true },
+  { route: 'BRL → EUR (Espanha)', volume: '€ 980K', change: '-3%', up: false },
+  { route: 'BRL → CHF (Suíça)', volume: '€ 670K', change: '+31%', up: true },
 ]
 
 export default function Metrics() {
@@ -91,7 +91,7 @@ export default function Metrics() {
 
   return (
     <>
-      <Header title="Metrics & KPIs" subtitle="Platform performance overview" />
+      <Header title="Métricas & KPIs" subtitle="Visão geral de desempenho da plataforma" />
 
       <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8">
         {/* KPI Row */}
@@ -106,7 +106,7 @@ export default function Metrics() {
           {/* Volume chart */}
           <div className="lg:col-span-2 flex flex-col gap-3 sm:gap-4 p-4 sm:p-6 rounded-xl border border-jinbe-border bg-jinbe-card">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <h3 className="text-sm font-semibold text-jinbe-text">Monthly Volume (EUR)</h3>
+              <h3 className="text-sm font-semibold text-jinbe-text">Volume Mensal (EUR)</h3>
               <div className="flex items-center gap-3 sm:gap-4 text-xs text-jinbe-dim">
                 <span className="flex items-center gap-1.5"><span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-jinbe-primary" /> Volume</span>
               </div>
@@ -129,7 +129,7 @@ export default function Metrics() {
 
           {/* Status distribution pie */}
           <div className="flex flex-col gap-3 sm:gap-4 p-4 sm:p-6 rounded-xl border border-jinbe-border bg-jinbe-card">
-            <h3 className="text-sm font-semibold text-jinbe-text">Status Distribution</h3>
+            <h3 className="text-sm font-semibold text-jinbe-text">Distribuição de Status</h3>
             <div className="h-[140px] sm:h-[160px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -168,7 +168,7 @@ export default function Metrics() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Rate trend */}
           <div className="flex flex-col gap-3 sm:gap-4 p-4 sm:p-6 rounded-xl border border-jinbe-border bg-jinbe-card">
-            <h3 className="text-sm font-semibold text-jinbe-text">BRL/EUR Exchange Rate (30d)</h3>
+            <h3 className="text-sm font-semibold text-jinbe-text">Taxa de Câmbio BRL/EUR (30d)</h3>
             <div className="h-[160px] sm:h-[180px] lg:h-[200px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={rateData}>
@@ -184,7 +184,7 @@ export default function Metrics() {
 
           {/* Top corridors */}
           <div className="flex flex-col gap-3 sm:gap-4 p-4 sm:p-6 rounded-xl border border-jinbe-border bg-jinbe-card">
-            <h3 className="text-sm font-semibold text-jinbe-text">Top Corridors</h3>
+            <h3 className="text-sm font-semibold text-jinbe-text">Principais Corredores</h3>
             <div className="flex flex-col gap-2 sm:gap-3">
               {corridors.map((c, i) => (
                 <div key={c.route} className="flex items-center justify-between py-2 sm:py-2.5 border-b border-jinbe-border last:border-0">
@@ -209,7 +209,7 @@ export default function Metrics() {
 
         {/* Top clients - Mobile cards, Desktop table */}
         <div className="flex flex-col gap-3 sm:gap-4 p-4 sm:p-6 rounded-xl border border-jinbe-border bg-jinbe-card">
-          <h3 className="text-sm font-semibold text-jinbe-text">Top Clients by Volume</h3>
+          <h3 className="text-sm font-semibold text-jinbe-text">Principais Clientes por Volume</h3>
 
           {/* Mobile view */}
           <div className="flex flex-col gap-3 sm:hidden">
@@ -239,7 +239,7 @@ export default function Metrics() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-jinbe-border">
-                  {['#', 'Client', 'Volume', 'Operations', 'Share'].map((col) => (
+                  {['#', 'Cliente', 'Volume', 'Operações', 'Participação'].map((col) => (
                     <th key={col} className="px-3 lg:px-4 py-2.5 text-left text-xs font-semibold text-jinbe-dim uppercase tracking-wider">{col}</th>
                   ))}
                 </tr>
@@ -268,12 +268,12 @@ export default function Metrics() {
 
         {/* Performance metrics */}
         <div className="flex flex-col gap-3 sm:gap-4 p-4 sm:p-6 rounded-xl border border-jinbe-border bg-jinbe-card">
-          <h3 className="text-sm font-semibold text-jinbe-text">Success Metrics</h3>
+          <h3 className="text-sm font-semibold text-jinbe-text">Métricas de Sucesso</h3>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
-              { label: 'Success Rate', value: '97.2%', icon: CheckCircle2, color: 'text-jinbe-success' },
-              { label: 'Failure Rate', value: '2.3%', icon: AlertTriangle, color: 'text-jinbe-danger' },
-              { label: 'Avg Processing', value: '3m 12s', icon: Clock, color: 'text-jinbe-primary' },
+              { label: 'Taxa de Sucesso', value: '97.2%', icon: CheckCircle2, color: 'text-jinbe-success' },
+              { label: 'Taxa de Falha', value: '2.3%', icon: AlertTriangle, color: 'text-jinbe-danger' },
+              { label: 'Processamento Médio', value: '3m 12s', icon: Clock, color: 'text-jinbe-primary' },
               { label: 'Compliance', value: '99.8%', icon: CheckCircle2, color: 'text-jinbe-success' },
             ].map((m) => {
               const MIcon = m.icon

@@ -10,17 +10,20 @@ import {
   Webhook,
   UserPlus,
   Sparkles,
+  Crown,
+  FileBarChart,
 } from 'lucide-react'
 import logoJinbe from '@/assets/logo-jinbe.png'
 
 const navItems = [
-  { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/operations', icon: ArrowLeftRight, label: 'Operations' },
-  { to: '/clients', icon: Users, label: 'Clients' },
+  { to: '/', icon: LayoutDashboard, label: 'Painel' },
+  { to: '/operations', icon: ArrowLeftRight, label: 'Operações' },
+  { to: '/clients', icon: Users, label: 'Clientes' },
   { to: '/customers', icon: UserPlus, label: 'Customers' },
-  { to: '/beneficiaries', icon: Landmark, label: 'Beneficiaries' },
+  { to: '/beneficiaries', icon: Landmark, label: 'Beneficiários' },
   { to: '/webhooks', icon: Webhook, label: 'Webhooks' },
-  { to: '/metrics', icon: BarChart3, label: 'Metrics' },
+  { to: '/metrics', icon: BarChart3, label: 'Métricas' },
+  { to: '/reports', icon: FileBarChart, label: 'Relatórios' },
 ]
 
 interface SidebarProps {
@@ -71,8 +74,22 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         ))}
       </nav>
 
-      {/* Onboarding Flow */}
-      <div className="border-t border-jinbe-border px-4 py-4">
+      {/* Admin & Onboarding */}
+      <div className="border-t border-jinbe-border px-4 py-4 space-y-1">
+        <NavLink
+          to="/admin"
+          onClick={onClose}
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+              isActive
+                ? 'bg-gradient-to-r from-jinbe-warning to-jinbe-danger text-white'
+                : 'text-jinbe-warning hover:bg-jinbe-warning/10'
+            }`
+          }
+        >
+          <Crown className="w-[18px] h-[18px]" />
+          Painel do Fundador
+        </NavLink>
         <NavLink
           to="/onboarding/login"
           onClick={onClose}
@@ -103,7 +120,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           }
         >
           <Settings className="w-[18px] h-[18px]" />
-          Settings
+          Configurações
         </NavLink>
       </div>
     </aside>

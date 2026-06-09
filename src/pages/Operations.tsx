@@ -10,9 +10,14 @@ import {
   MoreHorizontal,
   ChevronLeft,
   ChevronRight,
+  Download,
+  FileText,
+  FileSpreadsheet,
 } from 'lucide-react'
 import { OperationDetailsModal } from '@/components/operations/OperationDetailsModal'
 import { Link } from 'react-router-dom'
+import { useTheme } from '@/contexts/ThemeContext'
+import { exportData, type ExportFormat } from '@/utils/export'
 
 type OperationStatus = 'completed' | 'processing' | 'pending' | 'failed' | 'cancelled'
 
@@ -29,11 +34,11 @@ interface Operation {
 }
 
 const statusConfig: Record<OperationStatus, { label: string; className: string }> = {
-  completed: { label: 'Completed', className: 'bg-jinbe-success/10 text-jinbe-success' },
-  processing: { label: 'Processing', className: 'bg-jinbe-primary/10 text-jinbe-primary' },
-  pending: { label: 'Pending', className: 'bg-jinbe-warning/10 text-jinbe-warning' },
-  failed: { label: 'Failed', className: 'bg-jinbe-danger/10 text-jinbe-danger' },
-  cancelled: { label: 'Cancelled', className: 'bg-jinbe-dim/10 text-jinbe-dim' },
+  completed: { label: 'Concluída', className: 'bg-jinbe-success/10 text-jinbe-success' },
+  processing: { label: 'Processando', className: 'bg-jinbe-primary/10 text-jinbe-primary' },
+  pending: { label: 'Pendente', className: 'bg-jinbe-warning/10 text-jinbe-warning' },
+  failed: { label: 'Falhou', className: 'bg-jinbe-danger/10 text-jinbe-danger' },
+  cancelled: { label: 'Cancelada', className: 'bg-jinbe-dim/10 text-jinbe-dim' },
 }
 
 const mockOperations: Operation[] = [
@@ -52,10 +57,29 @@ const mockOperations: Operation[] = [
 const filterStatuses: OperationStatus[] = ['completed', 'processing', 'pending', 'failed', 'cancelled']
 
 export default function Operations() {
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState<OperationStatus | 'all'>('all')
   const [selectedOp, setSelectedOp] = useState<Operation | null>(null)
   const [showFilters, setShowFilters] = useState(false)
+  const [showExportMenu, setShowExportMenu] = useState(false)
+
+  const handleExport = (format: ExportFormat) => {
+    const columns = [
+      { key: 'id', header: 'ID Operação' },
+      { key: 'client', header: 'Cliente' },
+      { key: 'beneficiary', header: 'Beneficiário' },
+      { key: 'amountBRL', header: 'Valor (BRL)' },
+      { key: 'amountEUR', header: 'Valor (EUR)' },
+      { key: 'rate', header: 'Taxa' },
+      { key: 'status', header: 'Status', formatter: (v: unknown) => statusConfig[v as OperationStatus]?.label || String(v) },
+      { key: 'date', header: 'Data' },
+      { key: 'type', header: 'Tipo' },
+    ]
+    exportData(format, filtered, columns, 'operacoes', 'Operações Jinbe')
+    setShowExportMenu(false)
+  }
 
   const filtered = mockOperations.filter((op) => {
     const matchesSearch = search === '' ||
@@ -68,7 +92,7 @@ export default function Operations() {
 
   return (
     <>
-      <Header title="Operations" subtitle="PIX → USDC → SEPA payment pipeline" />
+      <Header title="Operações" subtitle="Pipeline de pagamentos PIX → USDC → SEPA" />
 
       <div className="flex flex-col gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8">
         {/* Toolbar */}
@@ -78,7 +102,7 @@ export default function Operations() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-jinbe-dim" />
               <input
                 type="text"
-                placeholder="Search operations..."
+                placeholder="Buscar operações..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full sm:w-[240px] lg:w-[280px] pl-10 pr-4 py-2.5 bg-jinbe-card border border-jinbe-border rounded-lg text-sm text-white placeholder:text-jinbe-dim focus:outline-none focus:border-jinbe-primary"
@@ -93,19 +117,57 @@ export default function Operations() {
               }`}
             >
               <Filter className="w-4 h-4" />
-              <span className="sm:inline">Filters</span>
+              <span className="sm:inline">Filtros</span>
               <ChevronDown className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          <Link
-            to="/operations/new"
-            className="flex items-center justify-center gap-2 px-5 py-2.5 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white text-sm font-semibold rounded-lg transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            <span className="hidden sm:inline">New Operation</span>
-            <span className="sm:hidden">New</span>
-          </Link>
+          <div className="flex items-center gap-2">
+            {/* Export Button */}
+            <div className="relative">
+              <button
+                onClick={() => setShowExportMenu(!showExportMenu)}
+                className="flex items-center gap-2 px-4 py-2.5 border border-jinbe-border text-jinbe-muted hover:text-white hover:border-jinbe-hover rounded-lg text-sm font-medium transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                <span className="hidden sm:inline">Exportar</span>
+              </button>
+
+              {showExportMenu && (
+                <div className={`absolute right-0 mt-2 w-44 rounded-lg border border-jinbe-border shadow-lg z-50 ${
+                  isLight ? 'bg-white' : 'bg-jinbe-card'
+                }`}>
+                  <button
+                    onClick={() => handleExport('csv')}
+                    className={`flex items-center gap-2 w-full px-4 py-2.5 text-sm hover:bg-jinbe-primary/10 ${
+                      isLight ? 'text-slate-900' : 'text-white'
+                    }`}
+                  >
+                    <FileText className="w-4 h-4 text-jinbe-muted" />
+                    CSV
+                  </button>
+                  <button
+                    onClick={() => handleExport('excel')}
+                    className={`flex items-center gap-2 w-full px-4 py-2.5 text-sm hover:bg-jinbe-primary/10 ${
+                      isLight ? 'text-slate-900' : 'text-white'
+                    }`}
+                  >
+                    <FileSpreadsheet className="w-4 h-4 text-jinbe-success" />
+                    Excel
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <Link
+              to="/operations/new"
+              className="flex items-center justify-center gap-2 px-5 py-2.5 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white text-sm font-semibold rounded-lg transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+              <span className="hidden sm:inline">Nova Operação</span>
+              <span className="sm:hidden">Nova</span>
+            </Link>
+          </div>
         </div>
 
         {/* Filter chips */}
@@ -118,7 +180,7 @@ export default function Operations() {
                 statusFilter === 'all' ? 'bg-jinbe-primary text-white' : 'bg-jinbe-card border border-jinbe-border text-jinbe-muted hover:text-white'
               }`}
             >
-              All
+              Todos
             </button>
             {filterStatuses.map((s) => (
               <button
@@ -181,7 +243,7 @@ export default function Operations() {
             <table className="w-full">
               <thead>
                 <tr className="bg-jinbe-sidebar border-b border-jinbe-border">
-                  {['Operation ID', 'Client', 'Beneficiary', 'Amount (BRL)', 'Amount (EUR)', 'Rate', 'Status', 'Date', ''].map((col) => (
+                  {['ID Operação', 'Cliente', 'Beneficiário', 'Valor (BRL)', 'Valor (EUR)', 'Taxa', 'Status', 'Data', ''].map((col) => (
                     <th key={col} className="px-5 py-3.5 text-left text-xs font-semibold text-jinbe-dim uppercase tracking-wider whitespace-nowrap">
                       {col && (
                         <span className="flex items-center gap-1.5 cursor-pointer hover:text-jinbe-muted">
@@ -237,7 +299,7 @@ export default function Operations() {
         {/* Pagination */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs sm:text-sm text-jinbe-dim order-2 sm:order-1">
-            Showing <span className="text-jinbe-text font-medium">{filtered.length}</span> of <span className="text-jinbe-text font-medium">{mockOperations.length}</span> operations
+            Exibindo <span className="text-jinbe-text font-medium">{filtered.length}</span> de <span className="text-jinbe-text font-medium">{mockOperations.length}</span> operações
           </p>
           <div className="flex items-center gap-1 order-1 sm:order-2">
             <button className="p-2 rounded-lg text-jinbe-dim hover:text-white hover:bg-jinbe-border/50 transition-colors">
