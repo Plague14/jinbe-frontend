@@ -15,6 +15,11 @@ import Reports from '@/pages/Reports'
 import Settings from '@/pages/Settings'
 import AdminPanel from '@/pages/AdminPanel'
 
+// Landing page
+import LandingPage from '@/pages/LandingPage'
+import TermosDeUso from '@/pages/TermosDeUso'
+import PoliticaPrivacidade from '@/pages/PoliticaPrivacidade'
+
 // Onboarding pages
 import Login from '@/pages/onboarding/Login'
 import Onboarding from '@/pages/onboarding/Onboarding'
@@ -23,6 +28,11 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Landing page (public) */}
+        <Route path="/landing" element={<LandingPage />} />
+        <Route path="/termos" element={<TermosDeUso />} />
+        <Route path="/privacidade" element={<PoliticaPrivacidade />} />
+
         {/* Onboarding flow (outside of AppLayout) */}
         <Route path="/onboarding/login" element={<Login />} />
         <Route path="/onboarding/register" element={<Onboarding />} />

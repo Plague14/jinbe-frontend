@@ -93,7 +93,7 @@ export default function Operations() {
 
   return (
     <>
-      <Header title="Operações" subtitle="Pipeline de pagamentos PIX → USDC → SEPA" />
+      <Header title="Operações" subtitle="Acompanhe suas transferências internacionais" />
 
       <div className="flex flex-col gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8">
         {/* Toolbar */}

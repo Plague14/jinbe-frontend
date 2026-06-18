@@ -42,7 +42,7 @@ const kpis = [
 export default function Dashboard() {
   return (
     <>
-      <Header title="Painel" subtitle="Acompanhamento de operações PIX para SEPA" />
+      <Header title="Painel" subtitle="Visão geral das suas operações internacionais" />
       
       <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8">
         {/* KPI Row */}

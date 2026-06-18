@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import {
   Mail,
@@ -37,7 +37,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import logoJinbe from '@/assets/logo-jinbe.png'
 
 // ─── Types ───────────────────────────────────────────────────────
-type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7
+type Step = 1 | 2 | 3 | 4 | 5 | 6
 
 interface StepConfig {
   label: string
@@ -47,11 +47,10 @@ interface StepConfig {
 const STEPS: Record<Step, StepConfig> = {
   1: { label: 'Criar conta', sublabel: 'E-mail e senha' },
   2: { label: 'Tipo de operação', sublabel: 'Envio, recebimento ou ambos' },
-  3: { label: 'Simulador de economia', sublabel: 'Veja o impacto antes de continuar' },
-  4: { label: 'Dados da empresa', sublabel: 'CNPJ e KYB via Urban' },
-  5: { label: 'Responsável legal', sublabel: 'Verificação de identidade' },
-  6: { label: 'Conta criada', sublabel: 'Próximos passos' },
-  7: { label: 'Funcionalidades', sublabel: 'Tour da plataforma' },
+  3: { label: 'Dados da empresa', sublabel: 'CNPJ e KYB via Urban' },
+  4: { label: 'Responsável legal', sublabel: 'Verificação de identidade' },
+  5: { label: 'Conta criada', sublabel: 'Próximos passos' },
+  6: { label: 'Funcionalidades', sublabel: 'Tour da plataforma' },
 }
 
 // ─── Operation types ─────────────────────────────────────────────
@@ -121,11 +120,7 @@ export default function Onboarding() {
   const [selectedSector, setSelectedSector] = useState('pescados')
   const [selectedVolume, setSelectedVolume] = useState('500k_2m')
 
-  // Step 3 - Simulador
-  const [simVolume, setSimVolume] = useState('150000')
-  const [simCurrency, setSimCurrency] = useState('EUR')
-
-  // Step 4 - Dados da empresa
+  // Step 3 - Dados da empresa
   const [cnpj, setCnpj] = useState('')
   const [razaoSocial, setRazaoSocial] = useState('')
   const [estado, setEstado] = useState('')
@@ -134,28 +129,11 @@ export default function Onboarding() {
   const [cnpjVerified, setCnpjVerified] = useState(false)
   const [cnpjCompanyName, setCnpjCompanyName] = useState('')
 
-  // Step 5 - Responsável legal
+  // Step 4 - Responsável legal
   const [nomeCompleto, setNomeCompleto] = useState('')
   const [cpf, setCpf] = useState('')
   const [cargo, setCargo] = useState('socio_administrador')
   const [acceptTerms, setAcceptTerms] = useState(false)
-
-  // Savings calculator
-  const savings = useMemo(() => {
-    const vol = parseFloat(simVolume) || 0
-    const rate = simCurrency === 'EUR' ? 6.15 : simCurrency === 'USD' ? 5.50 : 7.20
-    const brlVolume = vol * rate
-    const bankCost = brlVolume * 0.041
-    const jinbeCost = brlVolume * 0.017
-    const monthlySaving = bankCost - jinbeCost
-    return {
-      bankCost: bankCost.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-      jinbeCost: jinbeCost.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-      monthly: monthlySaving.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-      yearly: (monthlySaving * 12).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-      monthlyRaw: monthlySaving,
-    }
-  }, [simVolume, simCurrency])
 
   // CNPJ formatting
   const formatCnpj = (value: string) => {
@@ -199,7 +177,7 @@ export default function Onboarding() {
   }
 
   const goNext = () => {
-    if (currentStep < 7) setCurrentStep((currentStep + 1) as Step)
+    if (currentStep < 6) setCurrentStep((currentStep + 1) as Step)
   }
 
   const goBack = () => {
@@ -229,7 +207,7 @@ export default function Onboarding() {
 
   // ─── Progress sidebar ────────────────────────────────────────
   const renderSidebar = () => (
-    <aside className="w-72 min-h-screen bg-[#0c1219] border-r border-jinbe-border flex flex-col p-6 shrink-0">
+    <aside className="hidden lg:flex w-72 min-h-screen bg-[#0c1219] border-r border-jinbe-border flex-col p-6 shrink-0">
       <img src={logoJinbe} alt="Jinbe" style={{ height: '48px', width: 'fit-content', marginBottom: '32px' }} />
 
       <p className="text-[11px] font-semibold text-jinbe-dim uppercase tracking-wider mb-4">
@@ -237,7 +215,7 @@ export default function Onboarding() {
       </p>
 
       <nav className="flex-1 space-y-1">
-        {([1, 2, 3, 4, 5, 6, 7] as Step[]).map((step) => {
+        {([1, 2, 3, 4, 5, 6] as Step[]).map((step) => {
           const config = STEPS[step]
           const isActive = step === currentStep
           const isDone = step < currentStep
@@ -288,15 +266,15 @@ export default function Onboarding() {
   // ─── Step 1: Criar conta ─────────────────────────────────────
   const renderStep1 = () => (
     <div className="w-full max-w-lg mx-auto">
-      <div className="flex items-center gap-3 mb-2">
-        <div className="w-10 h-10 rounded-xl bg-jinbe-warning/20 flex items-center justify-center">
+      <div className="flex items-start gap-3 mb-2">
+        <div className="w-10 h-10 rounded-xl bg-jinbe-warning/20 flex items-center justify-center shrink-0">
           <Lock className="w-5 h-5 text-jinbe-warning" />
         </div>
         <div>
-          <h1 className="text-2xl font-semibold text-white">Bem-vindo à Jinbe</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold text-white">Bem-vindo à Jinbe</h1>
         </div>
       </div>
-      <p className="text-jinbe-muted mb-8 ml-[52px]">
+      <p className="text-jinbe-muted mb-6 sm:mb-8 ml-0 sm:ml-[52px] text-sm sm:text-base">
         Pague ou receba do exterior com até 50% de economia. Sem mensalidade — você paga só quando usar.
       </p>
 
@@ -380,15 +358,15 @@ export default function Onboarding() {
   // ─── Step 2: Tipo de operação ────────────────────────────────
   const renderStep2 = () => (
     <div className="w-full max-w-lg mx-auto">
-      <div className="flex items-center gap-3 mb-2">
-        <div className="w-10 h-10 rounded-xl bg-jinbe-primary/20 flex items-center justify-center">
+      <div className="flex items-start gap-3 mb-2">
+        <div className="w-10 h-10 rounded-xl bg-jinbe-primary/20 flex items-center justify-center shrink-0">
           <ArrowLeftRight className="w-5 h-5 text-jinbe-primary" />
         </div>
         <div>
-          <h1 className="text-2xl font-semibold text-white">Como sua empresa opera no exterior?</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold text-white">Como sua empresa opera no exterior?</h1>
         </div>
       </div>
-      <p className="text-jinbe-muted mb-8 ml-[52px]">Isso personaliza seu painel e define sua experiência na plataforma.</p>
+      <p className="text-jinbe-muted mb-6 sm:mb-8 ml-0 sm:ml-[52px] text-sm sm:text-base">Isso personaliza seu painel e define sua experiência na plataforma.</p>
 
       {/* Tipo de operação */}
       <p className="text-[11px] font-semibold text-jinbe-dim uppercase tracking-wider mb-3">Tipo de operação</p>
@@ -446,7 +424,7 @@ export default function Onboarding() {
 
       {/* Volume */}
       <p className="text-[11px] font-semibold text-jinbe-dim uppercase tracking-wider mb-3">Volume financeiro mensal esperado</p>
-      <div className="grid grid-cols-2 gap-3 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
         {volumes.map((v) => {
           const selected = selectedVolume === v.id
           return (
@@ -476,117 +454,18 @@ export default function Onboarding() {
     </div>
   )
 
-  // ─── Step 3: Simulador de economia ───────────────────────────
+  // ─── Step 3: Dados da empresa ────────────────────────────────
   const renderStep3 = () => (
     <div className="w-full max-w-lg mx-auto">
-      <div className="flex items-center gap-3 mb-2">
-        <div className="w-10 h-10 rounded-xl bg-jinbe-warning/20 flex items-center justify-center">
-          <DollarSign className="w-5 h-5 text-jinbe-warning" />
-        </div>
-        <div>
-          <h1 className="text-2xl font-semibold text-white">Veja sua economia antes de qualquer documento</h1>
-        </div>
-      </div>
-      <p className="text-jinbe-muted mb-8 ml-[52px]">Coloque seu volume mensal e descubra quanto você está perdendo hoje.</p>
-
-      <div className="border border-jinbe-border rounded-xl p-6 mb-6">
-        <p className="text-[11px] font-semibold text-jinbe-dim uppercase tracking-wider mb-4 flex items-center gap-2">
-          <DollarSign className="w-4 h-4" /> Calculadora de economia
-        </p>
-
-        <div className="space-y-4 mb-6">
-          <div className="flex items-center gap-4">
-            <label className="text-sm text-jinbe-muted w-32 shrink-0">Volume mensal</label>
-            <div className="relative flex-1">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-jinbe-dim text-sm">€</span>
-              <input
-                type="text"
-                value={simVolume}
-                onChange={(e) => setSimVolume(e.target.value.replace(/[^\d]/g, ''))}
-                className="w-full pl-8 pr-4 py-2.5 bg-jinbe-bg border border-jinbe-border rounded-lg text-white focus:outline-none focus:border-jinbe-primary transition-colors"
-              />
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <label className="text-sm text-jinbe-muted w-32 shrink-0">Moeda</label>
-            <select
-              value={simCurrency}
-              onChange={(e) => setSimCurrency(e.target.value)}
-              className="flex-1 px-4 py-2.5 bg-jinbe-bg border border-jinbe-border rounded-lg text-white focus:outline-none focus:border-jinbe-primary transition-colors appearance-none cursor-pointer"
-            >
-              {currencies.map((c) => (
-                <option key={c.value} value={c.value}>{c.label}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        {/* Results */}
-        <div className="bg-jinbe-bg rounded-lg p-4 space-y-2 mb-4">
-          <div className="flex justify-between">
-            <span className="text-sm text-jinbe-muted">Banco tradicional (~4,1%)</span>
-            <span className="text-sm font-semibold text-jinbe-danger">{savings.bankCost}/mês</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-sm text-jinbe-muted">Jinbe (1,7%)</span>
-            <span className="text-sm font-semibold text-white">{savings.jinbeCost}/mês</span>
-          </div>
-          <div className="border-t border-jinbe-border my-2" />
-          <div className="flex justify-between">
-            <span className="text-sm font-semibold text-jinbe-success">Economia mensal estimada</span>
-            <span className="text-sm font-bold text-white">{savings.monthly}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-sm text-jinbe-dim">Projeção anual</span>
-            <span className="text-sm font-semibold text-jinbe-success">{savings.yearly}/ano</span>
-          </div>
-        </div>
-      </div>
-
-      {/* KPIs */}
-      <div className="grid grid-cols-3 gap-3 mb-8">
-        <div className="text-center p-4 bg-jinbe-card border border-jinbe-border rounded-xl">
-          <p className="text-xl font-bold text-jinbe-success">1,7%</p>
-          <p className="text-xs text-jinbe-muted mt-1">Taxa Jinbe</p>
-        </div>
-        <div className="text-center p-4 bg-jinbe-card border border-jinbe-border rounded-xl">
-          <p className="text-xl font-bold text-jinbe-success">{'< 1h'}</p>
-          <p className="text-xs text-jinbe-muted mt-1">Liquidação</p>
-        </div>
-        <div className="text-center p-4 bg-jinbe-card border border-jinbe-border rounded-xl">
-          <p className="text-xl font-bold text-jinbe-success">0</p>
-          <p className="text-xs text-jinbe-muted mt-1">Intermediários</p>
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <div className="flex gap-3">
-        <button onClick={goBack} className="flex items-center gap-2 px-6 py-3 border border-jinbe-border hover:bg-jinbe-hover text-white rounded-lg transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Voltar
-        </button>
-        <button onClick={goNext} className="flex-1 py-3 bg-jinbe-success hover:bg-jinbe-success/90 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
-          Quero economizar {savings.monthly}/mês <ArrowRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      <p className="text-center text-[11px] text-jinbe-dim mt-4">
-        Estimativa baseada em custo médio bancário. Resultado real pode variar conforme a operação.
-      </p>
-    </div>
-  )
-
-  // ─── Step 4: Dados da empresa ────────────────────────────────
-  const renderStep4 = () => (
-    <div className="w-full max-w-lg mx-auto">
-      <div className="flex items-center gap-3 mb-2">
-        <div className="w-10 h-10 rounded-xl bg-jinbe-primary/20 flex items-center justify-center">
+      <div className="flex items-start gap-3 mb-2">
+        <div className="w-10 h-10 rounded-xl bg-jinbe-primary/20 flex items-center justify-center shrink-0">
           <Building2 className="w-5 h-5 text-jinbe-primary" />
         </div>
         <div>
-          <h1 className="text-2xl font-semibold text-white">Dados da empresa</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold text-white">Dados da empresa</h1>
         </div>
       </div>
-      <p className="text-jinbe-muted mb-6 ml-[52px]">Buscamos automaticamente na Receita Federal pelo CNPJ. Verificação KYB via Urban Exchange.</p>
+      <p className="text-jinbe-muted mb-4 sm:mb-6 ml-0 sm:ml-[52px] text-sm sm:text-base">Buscamos automaticamente na Receita Federal pelo CNPJ. Verificação KYB via Urban Exchange.</p>
 
       {/* KYB notice */}
       <div className="flex items-start gap-3 p-4 bg-jinbe-info/10 border border-jinbe-info/20 rounded-xl mb-6">
@@ -633,7 +512,7 @@ export default function Onboarding() {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-jinbe-muted mb-2">Estado</label>
             <input
@@ -686,18 +565,18 @@ export default function Onboarding() {
     </div>
   )
 
-  // ─── Step 5: Responsável legal ───────────────────────────────
-  const renderStep5 = () => (
+  // ─── Step 4: Responsável legal ───────────────────────────────
+  const renderStep4 = () => (
     <div className="w-full max-w-lg mx-auto">
-      <div className="flex items-center gap-3 mb-2">
-        <div className="w-10 h-10 rounded-xl bg-jinbe-primary/20 flex items-center justify-center">
+      <div className="flex items-start gap-3 mb-2">
+        <div className="w-10 h-10 rounded-xl bg-jinbe-primary/20 flex items-center justify-center shrink-0">
           <Users className="w-5 h-5 text-jinbe-primary" />
         </div>
         <div>
-          <h1 className="text-2xl font-semibold text-white">Responsável legal</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold text-white">Responsável legal</h1>
         </div>
       </div>
-      <p className="text-jinbe-muted mb-8 ml-[52px]">Verificação de identidade exigida pelo Banco Central — feita em menos de 2 minutos pelo celular.</p>
+      <p className="text-jinbe-muted mb-6 sm:mb-8 ml-0 sm:ml-[52px] text-sm sm:text-base">Verificação de identidade exigida pelo Banco Central — feita em menos de 2 minutos pelo celular.</p>
 
       {/* Verification steps */}
       <p className="text-[11px] font-semibold text-jinbe-dim uppercase tracking-wider mb-4">Etapas de verificação</p>
@@ -732,7 +611,7 @@ export default function Onboarding() {
       </div>
 
       <div className="space-y-5">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-jinbe-muted mb-2">Nome completo</label>
             <input
@@ -809,16 +688,16 @@ export default function Onboarding() {
     </div>
   )
 
-  // ─── Step 6: Conta criada ────────────────────────────────────
-  const renderStep6 = () => (
+  // ─── Step 5: Conta criada ────────────────────────────────────
+  const renderStep5 = () => (
     <div className="w-full max-w-lg mx-auto text-center">
-      <div className="flex justify-center mb-6">
-        <div className="w-20 h-20 rounded-full bg-jinbe-success/20 flex items-center justify-center">
-          <Check className="w-10 h-10 text-jinbe-success" />
+      <div className="flex justify-center mb-4 sm:mb-6">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-jinbe-success/20 flex items-center justify-center">
+          <Check className="w-8 h-8 sm:w-10 sm:h-10 text-jinbe-success" />
         </div>
       </div>
 
-      <h1 className="text-2xl font-semibold text-white mb-2">Conta criada com sucesso!</h1>
+      <h1 className="text-xl sm:text-2xl font-semibold text-white mb-2">Conta criada com sucesso!</h1>
       <p className="text-jinbe-muted mb-2">
         Um e-mail de confirmação foi enviado para<br />
         <span className="text-white">{email || 'carlos@pescados.com.br'}</span>.
@@ -859,23 +738,6 @@ export default function Onboarding() {
         </div>
       </div>
 
-      {/* Savings recap */}
-      <div className="border border-jinbe-border rounded-xl p-4 mb-8">
-        <p className="text-[11px] font-semibold text-jinbe-dim uppercase tracking-wider mb-3 flex items-center justify-center gap-2">
-          <DollarSign className="w-4 h-4" /> Sua economia estimada com a Jinbe
-        </p>
-        <div className="flex justify-between items-center">
-          <div className="text-left">
-            <p className="text-sm font-semibold text-jinbe-success">Economia mensal</p>
-            <p className="text-xs text-jinbe-dim">Projeção anual</p>
-          </div>
-          <div className="text-right">
-            <p className="text-lg font-bold text-white">{savings.monthly}</p>
-            <p className="text-sm font-semibold text-jinbe-success">{savings.yearly}/ano</p>
-          </div>
-        </div>
-      </div>
-
       <button
         onClick={goNext}
         className="w-full py-3.5 bg-jinbe-success hover:bg-jinbe-success/90 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
@@ -885,20 +747,20 @@ export default function Onboarding() {
     </div>
   )
 
-  // ─── Step 7: Funcionalidades ─────────────────────────────────
-  const renderStep7 = () => (
+  // ─── Step 6: Funcionalidades ─────────────────────────────────
+  const renderStep6 = () => (
     <div className="w-full max-w-2xl mx-auto">
-      <div className="flex items-center gap-3 mb-2">
-        <div className="w-10 h-10 rounded-xl bg-jinbe-success/20 flex items-center justify-center">
+      <div className="flex items-start gap-3 mb-2">
+        <div className="w-10 h-10 rounded-xl bg-jinbe-success/20 flex items-center justify-center shrink-0">
           <Rocket className="w-5 h-5 text-jinbe-success" />
         </div>
         <div>
-          <h1 className="text-2xl font-semibold text-white">Tudo na palma da sua mão</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold text-white">Tudo na palma da sua mão</h1>
         </div>
       </div>
-      <p className="text-jinbe-muted mb-8 ml-[52px]">Confira o que a Jinbe coloca à disposição da sua empresa — construído para o seu negócio.</p>
+      <p className="text-jinbe-muted mb-6 sm:mb-8 ml-0 sm:ml-[52px] text-sm sm:text-base">Confira o que a Jinbe coloca à disposição da sua empresa — construído para o seu negócio.</p>
 
-      <div className="grid grid-cols-2 gap-3 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
         {features.map((f, i) => {
           const Icon = f.icon
           const isHighlight = i === 0
@@ -906,7 +768,7 @@ export default function Onboarding() {
             <div
               key={f.label}
               className={`p-4 rounded-xl border transition-all ${
-                isHighlight ? 'bg-jinbe-success/10 border-jinbe-success/30' : i === features.length - 1 ? 'col-span-2 bg-jinbe-card border-jinbe-border' : 'bg-jinbe-card border-jinbe-border'
+                isHighlight ? 'bg-jinbe-success/10 border-jinbe-success/30' : i === features.length - 1 ? 'sm:col-span-2 bg-jinbe-card border-jinbe-border' : 'bg-jinbe-card border-jinbe-border'
               }`}
             >
               <div className="flex items-start justify-between mb-2">
@@ -948,29 +810,44 @@ export default function Onboarding() {
       case 4: return renderStep4()
       case 5: return renderStep5()
       case 6: return renderStep6()
-      case 7: return renderStep7()
     }
   }
 
   return (
     <div className="flex min-h-screen bg-jinbe-bg">
       {renderSidebar()}
-      <main className="flex-1 flex items-start justify-center overflow-y-auto py-12 px-8">
-        <div className="w-full max-w-2xl">
-          {/* Step indicator top-right */}
-          <div className="flex justify-end mb-6">
-            <span className="text-sm text-jinbe-dim">Etapa {currentStep} de 7</span>
+      <main className="flex-1 flex flex-col items-start justify-start overflow-y-auto">
+        {/* Mobile header */}
+        <div className="lg:hidden w-full px-4 py-4 border-b border-jinbe-border bg-[#0c1219]">
+          <div className="flex items-center justify-between mb-3">
+            <img src={logoJinbe} alt="Jinbe" className="h-8" />
+            <span className="text-sm text-jinbe-dim">Etapa {currentStep} de 6</span>
           </div>
-
-          {/* Progress bar */}
-          <div className="h-1 bg-jinbe-border rounded-full mb-8">
+          <div className="h-1 bg-jinbe-border rounded-full">
             <div
               className="h-full bg-jinbe-primary rounded-full transition-all duration-500"
-              style={{ width: `${(currentStep / 7) * 100}%` }}
+              style={{ width: `${(currentStep / 6) * 100}%` }}
             />
           </div>
+        </div>
 
-          {renderCurrentStep()}
+        <div className="w-full flex-1 flex items-start justify-center py-6 px-4 sm:py-8 sm:px-6 lg:py-12 lg:px-8">
+          <div className="w-full max-w-2xl">
+            {/* Desktop step indicator */}
+            <div className="hidden lg:flex justify-end mb-6">
+              <span className="text-sm text-jinbe-dim">Etapa {currentStep} de 6</span>
+            </div>
+
+            {/* Desktop progress bar */}
+            <div className="hidden lg:block h-1 bg-jinbe-border rounded-full mb-8">
+              <div
+                className="h-full bg-jinbe-primary rounded-full transition-all duration-500"
+                style={{ width: `${(currentStep / 6) * 100}%` }}
+              />
+            </div>
+
+            {renderCurrentStep()}
+          </div>
         </div>
       </main>
     </div>

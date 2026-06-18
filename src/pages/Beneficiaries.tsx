@@ -64,7 +64,7 @@ export default function Beneficiaries() {
 
   return (
     <>
-      <Header title="Beneficiários" subtitle="Diretório de beneficiários SEPA europeus" />
+      <Header title="Beneficiários" subtitle="Gerencie seus destinatários internacionais" />
 
       <div className="flex flex-col gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8">
         {/* Toolbar */}

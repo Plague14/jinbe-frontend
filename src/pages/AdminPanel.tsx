@@ -105,14 +105,14 @@ const statusConfig = {
 
 // Configuração de Spread por Cliente
 const initialSpreadConfig = [
-  { id: 1, name: 'Importadora Silva & Cia', sector: 'Pescados', volume: '€ 4.25M', currentSpread: 1.85, defaultSpread: 1.72, status: 'active' as const },
-  { id: 2, name: 'Agro Norte LTDA', sector: 'Agronegócio', volume: '€ 3.18M', currentSpread: 1.72, defaultSpread: 1.72, status: 'active' as const },
-  { id: 3, name: 'TechBR Solutions', sector: 'Tecnologia', volume: '€ 2.89M', currentSpread: 1.65, defaultSpread: 1.72, status: 'active' as const },
-  { id: 4, name: 'Metal Export SA', sector: 'Indústria', volume: '€ 2.45M', currentSpread: 1.78, defaultSpread: 1.72, status: 'active' as const },
-  { id: 5, name: 'Distribuidora Global', sector: 'Comércio', volume: '€ 1.98M', currentSpread: 1.55, defaultSpread: 1.72, status: 'pending' as const },
-  { id: 6, name: 'Pescados do Sul', sector: 'Pescados', volume: '€ 1.75M', currentSpread: 1.90, defaultSpread: 1.72, status: 'active' as const },
-  { id: 7, name: 'AgroTech Brasil', sector: 'Agronegócio', volume: '€ 1.42M', currentSpread: 1.68, defaultSpread: 1.72, status: 'active' as const },
-  { id: 8, name: 'Indústria Paulista', sector: 'Indústria', volume: '€ 1.18M', currentSpread: 1.75, defaultSpread: 1.72, status: 'review' as const },
+  { id: 1, name: 'Importadora Silva & Cia', sector: 'Pescados', volume: '€ 4.25M', currentSpread: 1.85, defaultSpread: 1.72, status: 'active' as const, comissionado: 'Israel Oliveira' },
+  { id: 2, name: 'Agro Norte LTDA', sector: 'Agronegócio', volume: '€ 3.18M', currentSpread: 1.72, defaultSpread: 1.72, status: 'active' as const, comissionado: 'Maria Santos' },
+  { id: 3, name: 'TechBR Solutions', sector: 'Tecnologia', volume: '€ 2.89M', currentSpread: 1.65, defaultSpread: 1.72, status: 'active' as const, comissionado: '' },
+  { id: 4, name: 'Metal Export SA', sector: 'Indústria', volume: '€ 2.45M', currentSpread: 1.78, defaultSpread: 1.72, status: 'active' as const, comissionado: 'Israel Oliveira' },
+  { id: 5, name: 'Distribuidora Global', sector: 'Comércio', volume: '€ 1.98M', currentSpread: 1.55, defaultSpread: 1.72, status: 'pending' as const, comissionado: 'João Pedro' },
+  { id: 6, name: 'Pescados do Sul', sector: 'Pescados', volume: '€ 1.75M', currentSpread: 1.90, defaultSpread: 1.72, status: 'active' as const, comissionado: 'Israel Oliveira' },
+  { id: 7, name: 'AgroTech Brasil', sector: 'Agronegócio', volume: '€ 1.42M', currentSpread: 1.68, defaultSpread: 1.72, status: 'active' as const, comissionado: '' },
+  { id: 8, name: 'Indústria Paulista', sector: 'Indústria', volume: '€ 1.18M', currentSpread: 1.75, defaultSpread: 1.72, status: 'review' as const, comissionado: 'Maria Santos' },
 ]
 
 export default function AdminPanel() {
@@ -405,6 +405,7 @@ export default function AdminPanel() {
                 <tr className="border-b border-jinbe-border">
                   <th className="text-left py-3 px-4 text-xs font-medium text-jinbe-muted">Cliente</th>
                   <th className="text-left py-3 px-4 text-xs font-medium text-jinbe-muted">Setor</th>
+                  <th className="text-left py-3 px-4 text-xs font-medium text-jinbe-muted">Comissionado(s)</th>
                   <th className="text-right py-3 px-4 text-xs font-medium text-jinbe-muted">Volume</th>
                   <th className="text-center py-3 px-4 text-xs font-medium text-jinbe-muted">Status</th>
                   <th className="text-center py-3 px-4 text-xs font-medium text-jinbe-muted">Spread Padrão</th>
@@ -430,6 +431,13 @@ export default function AdminPanel() {
                         <span className="text-xs px-2 py-1 rounded-full bg-jinbe-primary/10 text-jinbe-primary">
                           {client.sector}
                         </span>
+                      </td>
+                      <td className="py-3 px-4">
+                        {client.comissionado ? (
+                          <span className="text-sm text-jinbe-muted">{client.comissionado}</span>
+                        ) : (
+                          <span className="text-xs text-jinbe-dim italic">—</span>
+                        )}
                       </td>
                       <td className={`py-3 px-4 text-right text-sm font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>
                         {client.volume}
