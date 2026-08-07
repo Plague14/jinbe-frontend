@@ -5,9 +5,10 @@ import {
   AlertCircle,
   ArrowRight,
   Copy,
-  ExternalLink,
+  FileText,
   XCircle,
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 interface Operation {
   id: string
@@ -149,13 +150,17 @@ export function OperationDetailsModal({ operation, onClose }: OperationDetailsMo
 
           {/* Actions */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 pt-2 border-t border-jinbe-border">
-            <button className="flex items-center justify-center gap-2 px-4 py-2.5 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white text-sm font-semibold rounded-lg transition-colors">
-              <ExternalLink className="w-4 h-4" />
-              View Full Details
-            </button>
+            <Link
+              to={`/operations/${operation.id}/receipt`}
+              onClick={onClose}
+              className="flex items-center justify-center gap-2 px-4 py-2.5 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white text-sm font-semibold rounded-lg transition-colors"
+            >
+              <FileText className="w-4 h-4" />
+              Ver Comprovante
+            </Link>
             <button className="flex items-center justify-center gap-2 px-4 py-2.5 border border-jinbe-border text-jinbe-muted hover:text-white text-sm font-medium rounded-lg transition-colors">
               <Copy className="w-4 h-4" />
-              Copy ID
+              Copiar ID
             </button>
           </div>
         </div>

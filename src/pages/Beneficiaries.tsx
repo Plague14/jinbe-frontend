@@ -7,7 +7,7 @@ import {
   Landmark,
   Globe,
   ArrowUpDown,
-  Eye,
+  BarChart3,
   MoreHorizontal,
   ChevronLeft,
   ChevronRight,
@@ -138,9 +138,13 @@ export default function Beneficiaries() {
                   <p className="text-[10px] text-jinbe-dim">Clientes</p>
                   <p className="text-sm font-semibold text-jinbe-text">{b.linkedClients}</p>
                 </div>
-                <button className="p-2 rounded-lg text-jinbe-dim hover:text-white hover:bg-jinbe-border/50 transition-colors">
-                  <Eye className="w-4 h-4" />
-                </button>
+                <Link
+                  to={`/counterparties/${b.id}`}
+                  className="p-2 rounded-lg text-jinbe-dim hover:text-jinbe-primary hover:bg-jinbe-primary/10 transition-colors"
+                  title="Ver análise"
+                >
+                  <BarChart3 className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           ))}
@@ -204,9 +208,13 @@ export default function Beneficiaries() {
                     <td className="px-5 py-4 text-sm font-medium text-jinbe-text whitespace-nowrap">{b.totalReceived}</td>
                     <td className="px-5 py-4 whitespace-nowrap">
                       <div className="flex items-center gap-1">
-                        <button className="p-1.5 rounded-md text-jinbe-dim hover:text-white hover:bg-jinbe-border/50 transition-colors">
-                          <Eye className="w-4 h-4" />
-                        </button>
+                        <Link
+                          to={`/counterparties/${b.id}`}
+                          className="p-1.5 rounded-md text-jinbe-dim hover:text-jinbe-primary hover:bg-jinbe-primary/10 transition-colors"
+                          title="Ver análise"
+                        >
+                          <BarChart3 className="w-4 h-4" />
+                        </Link>
                         <button className="p-1.5 rounded-md text-jinbe-dim hover:text-white hover:bg-jinbe-border/50 transition-colors">
                           <MoreHorizontal className="w-4 h-4" />
                         </button>
