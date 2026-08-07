@@ -3,12 +3,9 @@ import {
   LayoutDashboard,
   ArrowLeftRight,
   Users,
-  Landmark,
   BarChart3,
   Settings,
   X,
-  Webhook,
-  UserPlus,
   Sparkles,
   Crown,
   FileBarChart,
@@ -19,10 +16,6 @@ const navItems = [
   { to: '/', icon: LayoutDashboard, label: 'Painel' },
   { to: '/operations', icon: ArrowLeftRight, label: 'Operações' },
   { to: '/clients', icon: Users, label: 'Clientes' },
-  { to: '/customers', icon: UserPlus, label: 'Customers' },
-  { to: '/beneficiaries', icon: Landmark, label: 'Beneficiários' },
-  { to: '/webhooks', icon: Webhook, label: 'Webhooks' },
-  { to: '/metrics', icon: BarChart3, label: 'Métricas' },
   { to: '/reports', icon: FileBarChart, label: 'Relatórios' },
 ]
 

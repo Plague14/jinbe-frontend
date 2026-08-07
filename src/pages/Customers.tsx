@@ -142,7 +142,7 @@ export default function Customers() {
 
   return (
     <div className="min-h-screen bg-jinbe-bg">
-      <Header title="Customers" />
+      <Header title="Clientes Finais" subtitle="Gerencie seus clientes na plataforma Urban" />
 
       <div className="px-4 sm:px-6 py-6">
         {/* Actions bar */}
@@ -162,7 +162,7 @@ export default function Customers() {
             className="flex items-center justify-center gap-2 px-6 py-3 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white font-medium rounded-lg transition-colors"
           >
             <Plus className="w-5 h-5" />
-            Novo Customer
+            Novo Cliente
           </Link>
         </div>
 
@@ -177,11 +177,11 @@ export default function Customers() {
         {!isLoading && filteredCustomers.length === 0 && (
           <div className="text-center py-12">
             <AlertCircle className="w-12 h-12 text-jinbe-dim mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-white mb-2">Nenhum customer encontrado</h3>
+            <h3 className="text-lg font-medium text-white mb-2">Nenhum cliente encontrado</h3>
             <p className="text-jinbe-muted mb-6">
               {searchQuery
                 ? 'Tente ajustar sua busca'
-                : 'Comece criando seu primeiro customer'}
+                : 'Comece criando seu primeiro cliente'}
             </p>
             {!searchQuery && (
               <Link
@@ -189,7 +189,7 @@ export default function Customers() {
                 className="inline-flex items-center gap-2 px-6 py-3 bg-jinbe-primary hover:bg-jinbe-primary/90 text-white font-medium rounded-lg transition-colors"
               >
                 <Plus className="w-5 h-5" />
-                Criar Customer
+                Criar Cliente
               </Link>
             )}
           </div>
@@ -284,26 +284,26 @@ export default function Customers() {
                       <p className="text-xs text-jinbe-dim mb-2">Spread</p>
                       <div className="flex gap-4">
                         <div>
-                          <span className="text-xs text-jinbe-muted">Digital Assets: </span>
+                          <span className="text-xs text-jinbe-muted">Ativos Digitais: </span>
                           <span className="text-white font-medium">{customer.spread.digital_assets}%</span>
                         </div>
                         <div>
-                          <span className="text-xs text-jinbe-muted">Global Payments: </span>
+                          <span className="text-xs text-jinbe-muted">Pagamentos Globais: </span>
                           <span className="text-white font-medium">{customer.spread.global_payments}%</span>
                         </div>
                       </div>
                     </div>
                     <div className="flex-1 p-3 bg-jinbe-bg/50 rounded-lg">
-                      <p className="text-xs text-jinbe-dim mb-2">Platforms</p>
+                      <p className="text-xs text-jinbe-dim mb-2">Plataformas</p>
                       <div className="flex gap-2">
                         {customer.platforms.digital_assets && (
                           <span className="px-2 py-1 bg-jinbe-info/20 text-jinbe-info text-xs rounded">
-                            Digital Assets
+                            Ativos Digitais
                           </span>
                         )}
                         {customer.platforms.global_payments && (
                           <span className="px-2 py-1 bg-jinbe-success/20 text-jinbe-success text-xs rounded">
-                            Global Payments
+                            Pagamentos Globais
                           </span>
                         )}
                       </div>

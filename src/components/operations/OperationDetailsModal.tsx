@@ -28,12 +28,12 @@ interface OperationDetailsModalProps {
 }
 
 const timelineSteps = [
-  { label: 'PIX Received', time: '14:32:05', status: 'completed' as const, detail: 'R$ 52,400.00 received via PIX' },
-  { label: 'Compliance Check', time: '14:32:12', status: 'completed' as const, detail: 'AML/KYC verification passed' },
-  { label: 'BRL → USDC Swap', time: '14:32:45', status: 'completed' as const, detail: 'Converted at rate 5.4300' },
-  { label: 'USDC → EUR Swap', time: '14:33:10', status: 'completed' as const, detail: '9,650 USDC → € 9,650.00' },
-  { label: 'SEPA Transfer', time: '14:33:30', status: 'processing' as const, detail: 'Initiating bank transfer' },
-  { label: 'Settlement', time: '—', status: 'pending' as const, detail: 'Awaiting confirmation' },
+  { label: 'PIX Recebido', time: '14:32:05', status: 'completed' as const, detail: 'R$ 52.400,00 recebido via PIX' },
+  { label: 'Verificação Compliance', time: '14:32:12', status: 'completed' as const, detail: 'Verificação AML/KYC aprovada' },
+  { label: 'Conversão BRL → USDC', time: '14:32:45', status: 'completed' as const, detail: 'Convertido à taxa 5,4300' },
+  { label: 'Conversão USDC → EUR', time: '14:33:10', status: 'completed' as const, detail: '9.650 USDC → € 9.650,00' },
+  { label: 'Transferência Bancária', time: '14:33:30', status: 'processing' as const, detail: 'Iniciando transferência internacional' },
+  { label: 'Liquidação', time: '—', status: 'pending' as const, detail: 'Aguardando confirmação' },
 ]
 
 const stepIcon = {
@@ -74,7 +74,7 @@ export function OperationDetailsModal({ operation, onClose }: OperationDetailsMo
           {/* Flow summary */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 p-3 sm:p-4 bg-jinbe-bg rounded-xl border border-jinbe-border">
             <div className="text-center sm:text-left">
-              <p className="text-[10px] sm:text-xs text-jinbe-dim uppercase tracking-wider mb-1">Origin</p>
+              <p className="text-[10px] sm:text-xs text-jinbe-dim uppercase tracking-wider mb-1">Origem</p>
               <p className="text-xs sm:text-sm font-semibold text-jinbe-text">{operation.client}</p>
               <p className="text-base sm:text-lg font-bold text-jinbe-text mt-1">{operation.amountBRL}</p>
             </div>
@@ -83,7 +83,7 @@ export function OperationDetailsModal({ operation, onClose }: OperationDetailsMo
               <span className="text-xs font-mono text-jinbe-muted">@ {operation.rate}</span>
             </div>
             <div className="text-center sm:text-right">
-              <p className="text-[10px] sm:text-xs text-jinbe-dim uppercase tracking-wider mb-1">Destination</p>
+              <p className="text-[10px] sm:text-xs text-jinbe-dim uppercase tracking-wider mb-1">Destino</p>
               <p className="text-xs sm:text-sm font-semibold text-jinbe-text">{operation.beneficiary}</p>
               <p className="text-base sm:text-lg font-bold text-jinbe-success mt-1">{operation.amountEUR}</p>
             </div>
@@ -92,11 +92,11 @@ export function OperationDetailsModal({ operation, onClose }: OperationDetailsMo
           {/* Details grid */}
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {[
-              { label: 'Operation ID', value: operation.id, mono: true },
-              { label: 'Exchange Rate', value: operation.rate, mono: true },
-              { label: 'Client', value: operation.client },
-              { label: 'Beneficiary', value: operation.beneficiary },
-              { label: 'Created', value: operation.date },
+              { label: 'ID Operação', value: operation.id, mono: true },
+              { label: 'Câmbio', value: operation.rate, mono: true },
+              { label: 'Cliente', value: operation.client },
+              { label: 'Beneficiário', value: operation.beneficiary },
+              { label: 'Criado em', value: operation.date },
               { label: 'Status', value: operation.status, badge: true },
             ].map((item) => (
               <div key={item.label} className="flex flex-col gap-0.5 sm:gap-1">
@@ -122,7 +122,7 @@ export function OperationDetailsModal({ operation, onClose }: OperationDetailsMo
 
           {/* Timeline */}
           <div>
-            <h3 className="text-xs sm:text-sm font-semibold text-jinbe-text mb-3 sm:mb-4">Operation Timeline</h3>
+            <h3 className="text-xs sm:text-sm font-semibold text-jinbe-text mb-3 sm:mb-4">Linha do Tempo</h3>
             <div className="flex flex-col">
               {timelineSteps.map((step, i) => (
                 <div key={step.label} className="flex gap-3 sm:gap-4">

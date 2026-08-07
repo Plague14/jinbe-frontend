@@ -119,11 +119,11 @@ export default function Beneficiaries() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-[10px] text-jinbe-dim uppercase">Bank</p>
+                    <p className="text-[10px] text-jinbe-dim uppercase">Banco</p>
                     <p className="text-xs text-jinbe-muted">{b.bank}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-[10px] text-jinbe-dim uppercase">Country</p>
+                    <p className="text-[10px] text-jinbe-dim uppercase">País</p>
                     <p className="text-xs text-jinbe-muted">{countryFlags[b.country]} {b.country}</p>
                   </div>
                 </div>

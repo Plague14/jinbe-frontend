@@ -21,7 +21,7 @@ const mockWebhooks: WebhookType[] = [
   {
     id: 'WHK00000123',
     url: 'https://partner.example.com/webhooks/urban',
-    description: 'Production webhook endpoint',
+    description: 'Endpoint de produção',
     status: 'active',
     events: ['customer.verification.updated', 'customer.tos.updated', 'customer.status.updated'],
     created_at: '2026-04-04T12:00:00Z',
@@ -29,7 +29,7 @@ const mockWebhooks: WebhookType[] = [
   {
     id: 'WHK00000124',
     url: 'https://staging.partner.com/webhooks',
-    description: 'Staging environment',
+    description: 'Ambiente de homologação',
     status: 'active',
     events: ['customer.verification.updated'],
     created_at: '2026-04-05T09:30:00Z',
@@ -410,7 +410,7 @@ export default function Webhooks() {
                       type="text"
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      placeholder="Production webhook endpoint"
+                      placeholder="Ex: Endpoint de produção"
                       className="w-full px-4 py-3 bg-jinbe-bg border border-jinbe-border rounded-lg text-white placeholder-jinbe-dim focus:outline-none focus:border-jinbe-primary transition-colors"
                     />
                   </div>

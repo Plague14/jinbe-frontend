@@ -85,7 +85,7 @@ const mockOperation = {
     {
       id: 'sent',
       label: 'Enviado ao beneficiário',
-      description: 'Transferência SEPA iniciada',
+      description: 'Transferência bancária iniciada',
       status: 'completed' as const,
       timestamp: '2026-08-06T10:33:12Z',
     },
@@ -118,7 +118,7 @@ const statusMessages: Record<OperationStatus, { title: string; subtitle: string;
   },
   sending: {
     title: 'Enviando para o beneficiário',
-    subtitle: 'Transferência SEPA em processamento',
+    subtitle: 'Transferência bancária em processamento',
     color: 'text-jinbe-primary',
   },
   completed: {
@@ -317,7 +317,7 @@ export default function OperationProgress() {
                 <p className={`text-sm ${isLight ? 'text-slate-600' : 'text-jinbe-muted'}`}>
                   {demoStatus === 'pix_received' && 'Verificando pagamento...'}
                   {demoStatus === 'converting' && 'Convertendo BRL para EUR...'}
-                  {demoStatus === 'sending' && 'Iniciando transferência SEPA...'}
+                  {demoStatus === 'sending' && 'Iniciando transferência bancária...'}
                 </p>
               </div>
             )}

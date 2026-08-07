@@ -11,7 +11,7 @@ const data = [
   { month: 'JUN', value: 1050000, target: 1250000 },
 ]
 
-const periods = ['6M', '1Y', 'All'] as const
+const periods = ['6M', '1A', 'Tudo'] as const
 
 export function VolumeChart() {
   const { theme } = useTheme()

@@ -5,8 +5,10 @@ import Operations from '@/pages/Operations'
 import NewOperation from '@/pages/NewOperation'
 import Clients from '@/pages/Clients'
 import ClientForm from '@/pages/ClientForm'
+import ClientDetail from '@/pages/ClientDetail'
 import Customers from '@/pages/Customers'
 import CustomerForm from '@/pages/CustomerForm'
+import CustomerDetail from '@/pages/CustomerDetail'
 import Beneficiaries from '@/pages/Beneficiaries'
 import BeneficiaryForm from '@/pages/BeneficiaryForm'
 import OperationReceipt from '@/pages/OperationReceipt'
@@ -59,8 +61,10 @@ export default function App() {
           <Route path="receivables/:id/divergence" element={<ReceivableDivergence />} />
           <Route path="clients" element={<Clients />} />
           <Route path="clients/new" element={<ClientForm />} />
+          <Route path="clients/:id" element={<ClientDetail />} />
           <Route path="customers" element={<Customers />} />
           <Route path="customers/new" element={<CustomerForm />} />
+          <Route path="customers/:id" element={<CustomerDetail />} />
           <Route path="beneficiaries" element={<Beneficiaries />} />
           <Route path="beneficiaries/new" element={<BeneficiaryForm />} />
           <Route path="counterparties/:id" element={<CounterpartyAnalysis />} />

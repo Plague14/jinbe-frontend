@@ -32,7 +32,7 @@ const activities: ActivityItem[] = [
   {
     id: '3',
     type: 'sepa_payout',
-    title: 'Pagamento SEPA',
+    title: 'Pagamento Internacional',
     amount: '€12.000,00',
     description: 'AgroTech SA → European Ag',
     status: 'Sucesso',
