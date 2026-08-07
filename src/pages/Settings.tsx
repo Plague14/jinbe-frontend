@@ -585,7 +585,6 @@ export default function Settings() {
           {[
             { id: 'light' as const, label: 'Claro', icon: Sun },
             { id: 'dark' as const, label: 'Escuro', icon: Moon },
-            { id: 'system' as const, label: 'Sistema', icon: Monitor },
           ].map((option) => {
             const Icon = option.icon
             const isSelected = theme === option.id
