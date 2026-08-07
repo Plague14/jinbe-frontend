@@ -165,7 +165,7 @@ export default function OperationProgress() {
 
   useEffect(() => {
     // Demo: auto-progress through statuses
-    const timers: NodeJS.Timeout[] = []
+    const timers: ReturnType<typeof setTimeout>[] = []
 
     if (demoStatus === 'awaiting_pix') {
       timers.push(setTimeout(() => setDemoStatus('pix_received'), 5000))
